@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Profil resmi TEAM TURA TURU. Menjelajahi jalanan dengan persaudaraan dan solidaritas di setiap kilometer.">
+    <meta name="keywords" content="komunitas motor, klub motor jogja, touring, pecinta motor custom, team tura turu">
+    <title>TEAM TURA TURU - Syndicate</title>
+    
+    <style>
+        /* Pengaturan Warna Utama */
+        :root {
+            --warna-aksen: #ff5722; 
+            --latar-belakang: #121212;
+            --latar-kartu: #1e1e1e;
+            --teks-putih: #ffffff;
+            --teks-abu: #b0b0b0;
+        }
+
+        /* Pengaturan Dasar */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--latar-belakang);
+            color: var(--teks-putih);
+            margin: 0;
+            line-height: 1.6;
+            overflow-x: hidden; /* Mencegah layar HP bisa digeser ke samping */
+        }
+
+        /* Bagian Kepala (Header) */
+        header {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('team.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 80px 20px;
+            text-align: center;
+            border-bottom: 4px solid var(--warna-aksen);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3.5em;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+        }
+
+        header p {
+            color: var(--warna-aksen);
+            font-size: 1.2em;
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        /* Pembungkus Konten Utama */
+        main {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Desain Kotak-kotak (Section) */
+        section {
+            background-color: var(--latar-kartu);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        h2 {
+            color: var(--warna-aksen);
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        /* Tata Letak Berbaris (Grid/Flexbox) untuk Anggota & Galeri */
+        .barisan-kartu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .kartu {
+            background-color: #2a2a2a;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            width: calc(33.333% - 40px);
+            min-width: 250px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-sizing: border-box; /* Mencegah kartu melebar keluar batas */
+        }
+
+        .kartu:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(255, 87, 34, 0.2);
+        }
+
+        .kartu img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover; 
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        /* Desain Tombol */
+        .tombol {
+            display: inline-block;
+            background-color: var(--warna-aksen);
+            color: #fff;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+
+        .tombol:hover {
+            background-color: #e64a19;
+        }
+
+        /* Bagian Bawah (Footer) */
+        footer {
+            text-align: center;
+            padding: 25px;
+            background-color: #050505;
+            color: var(--teks-abu);
+            border-top: 1px solid #222;
+        }
+
+        /* --- DESAIN UNTUK GALERI KENANGAN --- */
+        .grid-galeri {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .item-galeri {
+            overflow: hidden; 
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            height: 220px; 
+            position: relative; 
+        }
+
+        .item-galeri img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .teks-galeri {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9)); 
+            color: #fff;
+            padding: 30px 10px 10px 10px; 
+            text-align: center;
+            font-size: 0.85em;
+            font-weight: bold;
+            box-sizing: border-box;
+            pointer-events: none; 
+        }
+
+        .item-galeri:hover img {
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+
+        /* ====================================================== */
+        /* KODE SAKTI AGAR WEBSITE LUAS DI HP (RESPONSIVE)        */
+        /* ====================================================== */
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 60px 15px; 
+            }
+            header h1 { 
+                font-size: 2.5em; 
+            }
+            main {
+                padding: 0 10px; 
+                margin: 15px auto;
+            }
+            section {
+                padding: 20px; 
+                margin-bottom: 20px;
+            }
+            .kartu { 
+                width: calc(50% - 20px); 
+                min-width: unset;
+            }
+            .grid-galeri {
+                grid-template-columns: repeat(2, 1fr); 
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 { 
+                font-size: 2em; 
+            }
+            section {
+                padding: 15px 10px; 
+            }
+            .kartu { 
+                width: 100%; 
+                margin-bottom: 10px;
+            }
+            .grid-galeri {
+                grid-template-columns: 1fr; 
+            }
+            .item-galeri {
+                height: 250px; 
+            }
+        }
+
+        /* ====================================================== */
+        /* KODE ANIMASI RINGAN (CSS KEYFRAMES)                    */
+        /* ====================================================== */
+
+        /* 1. Animasi Judul Turun dari Atas */
+        @keyframes turunDariAtas {
+            0% { opacity: 0; transform: translateY(-50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        header h1 {
+            animation: turunDariAtas 1.2s ease-out;
+        }
+        header p {
+            animation: turunDariAtas 1.5s ease-out; 
+        }
+
+        /* 2. Animasi Denyut (Pulse) untuk Tombol */
+        @keyframes denyutAksen {
+            0% { box-shadow: 0 0 0 0 rgba(255, 87, 34, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 87, 34, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 87, 34, 0); }
+        }
+        @keyframes denyutWA {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        
+        .tombol {
+            animation: denyutAksen 2s infinite; 
+        }
+        .tombol[href*="wa.me"] {
+            animation: denyutWA 2s infinite; 
+        }
+
+        /* 3. Kelas Persiapan untuk Sensor Gulir (Scroll Reveal) */
+        .efek-gulir {
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+            transition: all 0.8s ease-out;
+        }
+        .efek-gulir.muncul {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>TEAM TURA TURU</h1>
+        <p>Solidaritas Tanpa Batas | Syndicate</p>
+        <a href="#bergabung" class="tombol">Bergabung Sekarang</a>
+    </header>
+
+    <main>
+        <section id="galeri" class="efek-gulir">
+            <h2>Galeri & Kenangan Aspal</h2>
+            <p style="text-align: center; color: var(--teks-abu);">Jejak roda, sisa tawa, dan cerita persaudaraan di setiap kilometer perjalanan.</p>
+            
+           <div class="grid-galeri">
+                <div class="item-galeri">
+                    <img src="bb1.jpg" alt="ACARA BUKBER BERSAMA TEAM LEDOLD.YKC">
+                    <div class="teks-galeri">ACARA BUKBER BERSAMA TEAM LEDOLD.YKC</div>
+                </div>
+                <div class="item-galeri">
+                    <img src="bb2.jpg" alt="ACARA BUKBER BERSAMA TEAM LEDOLD.YKC">
+                    <div class="teks-galeri">ACARA BUKBER BERSAMA TEAM LEDOLD.YKC</div>
+                </div>
+                <div class="item-galeri">
+                    <img src="nr.jpg" alt="NIGHT RIDE BERSAMA TEAM LEDOLD.YK">
+                    <div class="teks-galeri">NIGHT RIDE BERSAMA TEAM LEDOLD.YKC</div>
+                </div>
+                <div class="item-galeri">
+                    <img src="homearif.jpg" alt="ACARA KUMPUL BERSAMA DI HOME ARIF">
+                    <div class="teks-galeri">ACARA KUMPUL BERSAMA DI HOME ARIF</div>
+                </div>
+                <div class="item-galeri">
+                    <img src="rumahpandu.jpg" alt="FOTO BERSAMA DI HOME PANDU">
+                    <div class="teks-galeri">FOTO BERSAMA DI HOME PANDU</div>
+                </div>
+                <div class="item-galeri">
+                    <img src="homearif1.jpg" alt="ACARA KUMPUL BERSAMA DI HOME ARIF">
+                    <div class="teks-galeri">ACARA KUMPUL BERSAMA DI HOME ARIF</div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="tentang-kami" class="efek-gulir">
+            <h2>Tentang Kami</h2>
+            <p>Kami adalah sekumpulan pecinta otomotif yang menjunjung tinggi persaudaraan. Berdiri sejak tanggal <strong>2 Agustus 2024</strong>, TEAM TURA TURU bukan sekedar tempat berkumpul, melainkan keluarga di atas jalan aspal.</p>
+            
+            <h3>Visi & Misi</h3>
+            <ul>
+                <li>Menjadi wadah silaturahmi dan menjunjung sportifitas persaudaraan yang positif bagi sesama pecinta otomotif roda dua.</li>
+                <li>Menjaga ketertiban lalu lintas dan menjadi pelopor keselamatan berkendara (Safety Riding).</li>
+                <li>Mengeksplorasi keindahan alam melalui kegiatan touring yang terencana dan solid.</li>
+            </ul>
+
+            <h4>PERATURAN KOMUNITAS</h4>
+            <ul>
+                <li>dilarang arogan di jalan.</li>
+                <li>no drugs & alcohol saat riding.</li>
+                <li>Menghormati sesama</li>
+            </ul>
+        </section>
+
+        <section id="jadwal-kegiatan" class="efek-gulir">
+            <h2>Agenda Rutin Kita</h2>
+            <p>Bagi kawan-kawan yang ingin merapat, berikut adalah jadwal rutin kegiatan Tura Turu Syndicate:</p>
+            <div class="barisan-kartu">
+                <div class="kartu">
+                    <h3>NightRide & Kopdar</h3>
+                    <p><strong>Setiap Malam Minggu</strong></p>
+                    <p>Titik Kumpul: Home fabian </p>
+                    <p style="font-size: 0.9em; color: var(--teks-abu);">Ngopi santai, diskusi modifikasi, dan rolling tipis membelah jalanan kota Yogyakarta.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="anggota-tim" class="efek-gulir">
+            <h2>Profil Anggota Inti & Pendiri</h2>
+            <p style="text-align: center; color: var(--teks-abu); margin-bottom: 30px;">
+                Klik pada foto atau username untuk mengunjungi profil media sosial masing-masing anggota.
+            </p>
+            
+            <div class="barisan-kartu">
+                <div class="kartu">
+                    <a href="https://www.instagram.com/nabssl_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+                        <img src="nabil.jpg" alt="Pendiri TEAM TURA TURU">
+                    </a>
+                    <p style="color: var(--warna-aksen); font-weight: bold; margin: 5px 0;">NABIL</p>
+                    <p style="font-size: 0.9em; color: var(--teks-abu);">"SESAKIT APAPUN DIRIMU TAK AKAN MEMBUATNYA BERTANYA KENAPA"</p>
+                    <div style="margin-top: 15px; font-size: 0.9em; line-height: 1.8;">
+                        <a href="https://www.instagram.com/nabssl_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="color: #ffe0b2; text-decoration: none; display: block;">
+                            📸 IG: @nabssl_
+                        </a>
+                        <a href="https://www.tiktok.com/@nabss_?is_from_webapp=1&sender_device=pc" target="_blank" style="color: #b2ebf2; text-decoration: none; display: block;">
+                            🎵 TikTok: @nabs._🪐
+                        </a>
+                    </div>
+                </div>
+
+                <div class="kartu">
+                    <a href="https://www.instagram.com/fabianmht12_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+                        <img src="fabian.jpg" alt="Wakil Ketua TEAM TURA TURU">
+                    </a>
+                    <p style="color: var(--warna-aksen); font-weight: bold; margin: 5px 0;">FABIAN</p>
+                    <p style="font-size: 0.9em; color: var(--teks-abu);">Menyusun strategi komunitas dan mengkondisikan internal tim agar tetap solid.</p>
+                    <div style="margin-top: 15px; font-size: 0.9em; line-height: 1.8;">
+                        <a href="https://www.instagram.com/fabianmht12_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="color: #ffe0b2; text-decoration: none; display: block;">
+                            📸 IG: @fabianmht12_
+                        </a>
+                        <a href="https://www.tiktok.com/@fabianmht_?is_from_webapp=1&sender_device=pc" target="_blank" style="color: #b2ebf2; text-decoration: none; display: block;">
+                            🎵 TikTok: @Berkah Penjahit🪡
+                        </a>
+                    </div>
+                </div>
+
+                <div class="kartu">
+                    <a href="https://www.instagram.com/mirlzzz_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+                        <img src="mirel.jpg" alt="Sekretaris TEAM TURA TURU">
+                    </a>
+                    <p style="color: var(--warna-aksen); font-weight: bold; margin: 5px 0;">MIREL</p>
+                    <p style="font-size: 0.9em; color: var(--teks-abu);">Mengelola data keanggotaan, administrasi, dan perizinan agenda resmi.</p>
+                    <div style="margin-top: 15px; font-size: 0.9em; line-height: 1.8;">
+                        <a href="https://www.instagram.com/mirlzzz_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="color: #ffe0b2; text-decoration: none; display: block;">
+                            📸 IG: @mirlzzz_
+                        </a>
+                        <a href="https://www.tiktok.com/@its.rimelll?is_from_webapp=1&sender_device=pc" target="_blank" style="color: #b2ebf2; text-decoration: none; display: block;">
+                            🎵 TikTok: @𝙍𝘼𝙕𝙕𝙀🪐
+                        </a>
+                    </div>
+                </div>
+
+                <div class="kartu">
+                    <a href="https://www.instagram.com/bangrifwp_?igsh=bnQ0aW80YmdmeA==" target="_blank">
+                        <img src="arif.jpg" alt="Bendahara TEAM TURA TURU">
+                    </a>
+                    <p style="color: var(--warna-aksen); font-weight: bold; margin: 5px 0;">ARIF</p>
+                    <p style="font-size: 0.9em; color: var(--teks-abu);">Mengatur sirkulasi uang kas, anggaran baksos, dan finansial merchandise.</p>
+                    <div style="margin-top: 15px; font-size: 0.9em; line-height: 1.8;">
+                        <a href="https://www.instagram.com/bangrifwp_?igsh=bnQ0aW80YmdmeA==" target="_blank" style="color: #ffe0b2; text-decoration: none; display: block;">
+                            📸 IG: @bangrifwp_
+                        </a>
+                        <a href="https://www.tiktok.com/@bangrifwpv2_?is_from_webapp=1&sender_device=pc" target="_blank" style="color: #b2ebf2; text-decoration: none; display: block;">
+                            🎵 TikTok: @𝗩𝗔𝗥𝗭𝗢𝗡𝗘
+                        </a>
+                    </div>
+                </div>
+
+                <div class="kartu">
+                    <a href="https://www.instagram.com/pwandot._?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+                        <img src="pandu.jpg" alt="Road Captain TEAM TURA TURU">
+                    </a>
+                    <p style="color: var(--warna-aksen); font-weight: bold; margin: 5px 0;">PANDU</p>
+                    <p style="font-size: 0.9em; color: var(--teks-abu);">Memimpin barisan paling depan saat touring dan menentukan ritme kecepatan.</p>
+                    <div style="margin-top: 15px; font-size: 0.9em; line-height: 1.8;">
+                        <a href="https://www.instagram.com/pwandot._?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="color: #ffe0b2; text-decoration: none; display: block;">
+                            📸 IG: @pwandot._
+                        </a>
+                        <a href="https://www.tiktok.com/@celeng_resinh?is_from_webapp=1&sender_device=pc" target="_blank" style="color: #b2ebf2; text-decoration: none; display: block;">
+                            🎵 TikTok: @pandot
+                        </a>
+                    </div>
+                </div>
+
+                <div class="kartu">
+                    <a href="https://www.instagram.com/paskadkp?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+                        <img src="devara.jpg" alt="Sweeper TEAM TURA TURU">
+                    </a>
+                    <p style="color: var(--warna-aksen); font-weight: bold; margin: 5px 0;">DEVARA</p>
+                    <p style="font-size: 0.9em; color: var(--teks-abu);">Mengawal barisan belakang, memastikan tidak ada anggota yang tertinggal.</p>
+                    <div style="margin-top: 15px; font-size: 0.9em; line-height: 1.8;">
+                        <a href="https://www.instagram.com/paskadkp?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="color: #ffe0b2; text-decoration: none; display: block;">
+                            📸 IG: @paskadkp
+                        </a>
+                        <a href="https://www.tiktok.com/@paskadkp?is_from_webapp=1&sender_device=pc" target="_blank" style="color: #b2ebf2; text-decoration: none; display: block;">
+                            🎵 TikTok: @paska devara
+                        </a>
+                    </div>
+                </div>
+
+                <div class="kartu">
+                    <a href="https://www.instagram.com/_lukascs?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+                        <img src="lukas.jpg" alt="Humas TEAM TURA TURU">
+                    </a>
+                    <p style="color: var(--warna-aksen); font-weight: bold; margin: 5px 0;">LUKAS</p>
+                    <p style="font-size: 0.9em; color: var(--teks-abu);">Menjadi penghubung komunikasi dengan komunitas atau club motor luar.</p>
+                    <div style="margin-top: 15px; font-size: 0.9em; line-height: 1.8;">
+                        <a href="https://www.instagram.com/_lukascs?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="color: #ffe0b2; text-decoration: none; display: block;">
+                            📸 IG: @_lukascs
+                        </a>
+                        <a href="https://www.tiktok.com/@lukaschellos?is_from_webapp=1&sender_device=pc" target="_blank" style="color: #b2ebf2; text-decoration: none; display: block;">
+                            🎵 TikTok: @𝐊𝐚𝐬𝐬.
+                        </a>
+                    </div>
+                </div>
+
+                <div class="kartu">
+                    <a href="https://www.instagram.com/animazi17?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+                        <img src="zikri.jpg" alt="Divisi Dokumentasi TEAM TURA TURU">
+                    </a>
+                    <p style="color: var(--warna-aksen); font-weight: bold; margin: 5px 0;">ZIKRI</p>
+                    <p style="font-size: 0.9em; color: var(--teks-abu);">Bertanggung jawab atas konten visual, jepretan kamera, dan video sinematik tim.</p>
+                    <div style="margin-top: 15px; font-size: 0.9em; line-height: 1.8;">
+                        <a href="https://www.instagram.com/animazi17?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="color: #ffe0b2; text-decoration: none; display: block;">
+                            📸 IG: @animazi17
+                        </a>
+                        <a href="https://www.tiktok.com/@zikriali17?is_from_webapp=1&sender_device=pc" target="_blank" style="color: #b2ebf2; text-decoration: none; display: block;">
+                            🎵 TikTok: @🅥🅐🅡🅔🅢🅐 🚭
+                        </a>
+                    </div>
+                </div>
+
+                <div class="kartu">
+                    <a href="https://www.instagram.com/arunika_k2v?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+                        <img src="candra.jpg" alt="Divisi Teknis TEAM TURA TURU">
+                    </a>
+                    <p style="color: var(--warna-aksen); font-weight: bold; margin: 5px 0;">CANDRA</p>
+                    <p style="font-size: 0.9em; color: var(--teks-abu);">Menyiapkan peralatan darurat (tools) dan penanganan jika ada motor kendala.</p>
+                    <div style="margin-top: 15px; font-size: 0.9em; line-height: 1.8;">
+                        <a href="https://www.instagram.com/arunika_k2v?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" style="color: #ffe0b2; text-decoration: none; display: block;">
+                            📸 IG: @arunika_k2v
+                        </a>
+                        <a href="https://www.tiktok.com/@masscandraaaa?is_from_webapp=1&sender_device=pc" target="_blank" style="color: #b2ebf2; text-decoration: none; display: block;">
+                            🎵 TikTok: @masscandraaaa
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        
+        <section id="bergabung" class="efek-gulir" style="text-align: center;">
+            <h2>Tertarik Satu Aspal Bersama Kami?</h2>
+            <p>Tidak peduli cc motor atau merk kuda besimu, selama punya jiwa persaudaraan, pintu selalu terbuka.</p>
+            <a href="https://instagram.com/turaturu_syndicate" target="_blank" class="tombol">DM via Instagram</a>
+            <a href="https://www.tiktok.com/@tura.turu.team?is_from_webapp=1&sender_device=pc" target="_blank" class="tombol">Tiktok</a>
+            <a href="https://wa.me/6287738116284" target="_blank" class="tombol" style="background-color: #25D366;">Chat WhatsApp</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 "Ndlogok Makes Your Life Happy" Tura Turu Syndicate.</p>
+        <p style="font-size: 0.8em;">Instagram: <a href="https://instagram.com/turaturu_syndicate" style="color: var(--warna-aksen); text-decoration: none;">@turaturu_syndicate</a></p>
+        <p style="font-size: 0.8em;">Tiktok: <a href="https://www.tiktok.com/@tura.turu.team?is_from_webapp=1&sender_device=pc" style="color: var(--warna-aksen); text-decoration: none;">@Tura Turu Syndicate</a></p>
+    </footer>
+
+    <script>
+        const pengamat = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('muncul');
+                }
+            });
+        }, {
+            threshold: 0.1 
+        });
+
+        const elemenAnimasi = document.querySelectorAll('.efek-gulir');
+        elemenAnimasi.forEach((el) => pengamat.observe(el));
+    </script>
+</body>
+</html>
