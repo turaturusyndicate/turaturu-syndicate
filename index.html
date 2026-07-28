@@ -222,7 +222,7 @@
         @keyframes pulseText { 0% { filter: drop-shadow(0 0 2px rgba(255, 18, 0, 0.4)); transform: scale(1); } 100% { filter: drop-shadow(0 0 10px rgba(255, 145, 0, 0.8)); transform: scale(1.08); } }
 
         /* ====================================================== */
-        /* BADGE JABATAN (BISA DIKLIK UNTUK MUNCULKAN INFO)       */
+        /* BADGE JABATAN (OPTIMAL DI HP & LAPTOP)                 */
         /* ====================================================== */
         .badge-role {
             position: absolute; 
@@ -240,7 +240,7 @@
             box-shadow: 0 4px 10px rgba(255, 145, 0, 0.3);
             z-index: 20; 
             transform: translateZ(30px); 
-            cursor: pointer; /* Indikasi bahwa badge bisa diklik */
+            cursor: pointer; 
             display: flex; 
             align-items: center; 
             gap: 6px;
@@ -261,7 +261,7 @@
         
         .badge-role i { font-size: 1.2em; color: var(--aksen-2); filter: drop-shadow(0 0 5px var(--aksen-1)); transition: color 0.3s; }
 
-        /* Animasi Icon Sesuai Karakter */
+        /* Animasi Icon */
         .anim-petir { animation: animPetir 2s infinite alternate; }
         @keyframes animPetir { 0% { transform: scale(1); filter: drop-shadow(0 0 5px #ff9100); } 100% { transform: scale(1.2); filter: drop-shadow(0 0 15px #ff1200); } }
 
@@ -309,7 +309,7 @@
         .kartu h3 { color: var(--teks-putih); margin-bottom: 5px; font-size: 1.4em; transform: translateZ(30px); position: relative; z-index: 2;}
         .kartu p { transform: translateZ(15px); position: relative; z-index: 2; }
         
-        /* Efek Pantulan Cahaya Hologram (Trading Card Glare) */
+        /* Efek Pantulan Cahaya Hologram */
         .kartu::after {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255, 145, 0, 0.15) 0%, transparent 60%);
@@ -376,7 +376,7 @@
         #btn-atas:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(255, 145, 0, 0.6); }
 
         /* ====================================================== */
-        /* FOOTER & MODAL POPUP PENJELASAN PERAN (BARU)          */
+        /* FOOTER & MODAL                                         */
         /* ====================================================== */
         footer { text-align: center; padding: 40px 20px; background-color: #050506; color: var(--teks-abu); border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.9em; position: relative; z-index: 2; }
         footer p { margin: 5px 0; }
@@ -388,7 +388,7 @@
         .tutup-modal { position: absolute; top: 15px; right: 20px; font-size: 28px; }
         .tutup-modal:hover, .tutup-zoom:hover { color: var(--aksen-1); text-shadow: 0 0 10px var(--aksen-1); }
         
-        /* Modal Khusus Info Peran */
+        /* Modal Info Peran */
         #modalInfoPeran .modal-konten { max-width: 450px; text-align: center; padding: 40px 30px; border-color: var(--aksen-2); }
         #modalInfoPeran h3 { color: var(--aksen-2); margin-top: 0; font-size: 1.8em; }
         #modalInfoPeran p { color: var(--teks-putih); font-size: 1.05em; line-height: 1.7; margin-top: 15px; }
@@ -411,7 +411,9 @@
 
         @keyframes zoomPop { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
 
-        /* RESPONSIVE */
+        /* ====================================================== */
+        /* RESPONSIVE KHUSUS HP (MOBILE OPTIMIZATION)             */
+        /* ====================================================== */
         @media (max-width: 768px) {
             .navbar { flex-direction: column; padding: 15px 20px; gap: 10px; }
             .link-nav { gap: 15px; }
@@ -427,7 +429,15 @@
             .waktu-box { padding: 10px 15px; min-width: 70px; }
             .waktu-box span { font-size: 2.2em; }
             .kartu { width: 100%; min-width: unset; transform: none !important; } 
-            .badge-role { top: 15px; right: 15px; }
+            
+            /* Penyesuaian khusus badge di layar HP */
+            .badge-role { 
+                top: 12px; 
+                right: 12px; 
+                padding: 4px 10px; 
+                font-size: 0.75em; 
+            }
+
             .grid-galeri { grid-template-columns: 1fr; }
             .wadah-tombol { flex-direction: column; align-items: stretch; }
             .tombol { margin: 5px 0; } 
@@ -568,7 +578,7 @@
         <section id="anggota-tim" class="efek-gulir">
             <h2>Profil Anggota Inti</h2>
             <p style="text-align: center; color: var(--teks-abu); margin-bottom: 30px;">
-                Klik pada badge untuk melihat penjelasan peran. Arahkan kursor ke kartu untuk efek 3D hologram.
+                Klik pada badge jabatan untuk melihat penjelasan peran. Arahkan kursor ke kartu untuk efek 3D hologram.
             </p>
             
             <div class="barisan-kartu">
@@ -751,7 +761,7 @@
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <!-- MODAL POPUP UNTUK PENJELASAN PERAN (BARU) -->
+    <!-- MODAL POPUP UNTUK PENJELASAN PERAN -->
     <div id="modalInfoPeran" class="modal-overlay" onclick="tutupInfoPeran(event)">
         <div class="modal-konten">
             <span class="tutup-modal" onclick="tutupInfoPeranManual()">&times;</span>
@@ -825,7 +835,7 @@
 
     <script>
         // ====================================================== //
-        // LOGIKA MODAL INFO PERAN TAKTIS (BARU)                  //
+        // LOGIKA MODAL INFO PERAN TAKTIS                         //
         // ====================================================== //
         function bukaInfoPeran(namaPeran, deskripsi) {
             document.getElementById('judulPeran').innerText = namaPeran;
