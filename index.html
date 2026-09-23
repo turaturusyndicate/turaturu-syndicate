@@ -17,19 +17,13 @@
         @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Poppins:wght@300;400;600&family=Rajdhani:wght@600;700&display=swap');
 
         /* ====================================================== */
-        /* EFEK SCROLL HALUS & CUSTOM SCROLLBAR BARU              */
+        /* EFEK SCROLL HALUS & CUSTOM SCROLLBAR                   */
         /* ====================================================== */
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         ::-webkit-scrollbar { width: 12px; }
         ::-webkit-scrollbar-track { background: #0a0a0c; }
-        ::-webkit-scrollbar-thumb { 
-            background: linear-gradient(to bottom, #ff1200, #ff9100); 
-            border-radius: 10px; 
-            border: 3px solid #0a0a0c;
-        }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, #ff1200, #ff9100); border-radius: 10px; border: 3px solid #0a0a0c; }
         ::-webkit-scrollbar-thumb:hover { background: #ff9100; }
 
         /* ====================================================== */
@@ -39,80 +33,41 @@
             --aksen-1: #ff1200; 
             --aksen-2: #ff9100; 
             --gradasi-neon: linear-gradient(135deg, var(--aksen-1), var(--aksen-2));
-            
             --latar-belakang: #0a0a0c; 
             --latar-kartu: #16161a;
             --latar-input: #1f1f24;
-            
             --teks-putih: #ffffff;
             --teks-abu: #a0a0a0;
-            
             --box-shadow-neon: 0 4px 15px rgba(255, 18, 0, 0.3);
             --text-shadow-neon: 0 0 10px rgba(255, 145, 0, 0.7);
         }
 
-        /* Pengaturan Dasar */
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--latar-belakang);
-            background-image: 
-                radial-gradient(at 10% 10%, rgba(255, 18, 0, 0.05) 0px, transparent 50%),
-                radial-gradient(at 90% 90%, rgba(255, 145, 0, 0.05) 0px, transparent 50%);
-            color: var(--teks-putih);
-            margin: 0;
-            padding-top: 80px; 
-            line-height: 1.6;
-            overflow-x: hidden; 
+            background-image: radial-gradient(at 10% 10%, rgba(255, 18, 0, 0.05) 0px, transparent 50%), radial-gradient(at 90% 90%, rgba(255, 145, 0, 0.05) 0px, transparent 50%);
+            color: var(--teks-putih); margin: 0; padding-top: 80px; line-height: 1.6; overflow-x: hidden; 
         }
 
-        h1, h2, h3, h4 {
-            font-family: 'Oswald', sans-serif;
-            font-weight: 700;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
+        h1, h2, h3, h4 { font-family: 'Oswald', sans-serif; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
 
         /* ====================================================== */
         /* EFEK TAMBAHAN: SCANLINES & PROGRESS                    */
         /* ====================================================== */
-        .scanlines {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.15));
-            background-size: 100% 4px; z-index: 9998; pointer-events: none; 
-        }
-
-        #scroll-progress {
-            position: fixed; top: 0; left: 0; width: 0%; height: 4px;
-            background: var(--gradasi-neon); box-shadow: 0 0 15px var(--aksen-1);
-            z-index: 10001; transition: width 0.1s ease;
-        }
+        .scanlines { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0) 50%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.15)); background-size: 100% 4px; z-index: 9998; pointer-events: none; }
+        #scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 4px; background: var(--gradasi-neon); box-shadow: 0 0 15px var(--aksen-1); z-index: 10001; transition: width 0.1s ease; }
 
         /* ====================================================== */
         /* PRELOADER (LAYAR LOADING)                              */
         /* ====================================================== */
-        #preloader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: var(--latar-belakang); z-index: 999999;
-            display: flex; justify-content: center; align-items: center; flex-direction: column; transition: opacity 0.6s ease;
-        }
-        .roda-loading {
-            width: 60px; height: 60px; border: 5px solid rgba(255, 255, 255, 0.1);
-            border-top: 5px solid var(--aksen-1); border-bottom: 5px solid var(--aksen-2);
-            border-radius: 50%; animation: putarRoda 1s linear infinite;
-        }
+        #preloader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--latar-belakang); z-index: 999999; display: flex; justify-content: center; align-items: center; flex-direction: column; transition: opacity 0.6s ease; }
+        .roda-loading { width: 60px; height: 60px; border: 5px solid rgba(255, 255, 255, 0.1); border-top: 5px solid var(--aksen-1); border-bottom: 5px solid var(--aksen-2); border-radius: 50%; animation: putarRoda 1s linear infinite; }
         @keyframes putarRoda { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         /* ====================================================== */
         /* MENU NAVIGASI (NAVBAR)                                 */
         /* ====================================================== */
-        .navbar {
-            position: fixed; top: 0; left: 0; width: 100%;
-            background-color: rgba(10, 10, 12, 0.85); backdrop-filter: blur(15px); 
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 15px 40px; box-sizing: border-box; z-index: 10000;
-            border-bottom: 2px solid transparent; border-image: var(--gradasi-neon) 1; box-shadow: 0 5px 20px rgba(0,0,0,0.7);
-        }
-
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; background-color: rgba(10, 10, 12, 0.85); backdrop-filter: blur(15px); display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; box-sizing: border-box; z-index: 10000; border-bottom: 2px solid transparent; border-image: var(--gradasi-neon) 1; box-shadow: 0 5px 20px rgba(0,0,0,0.7); }
         .logo-menu { display: flex; align-items: center; gap: 15px; color: var(--teks-putih); font-weight: bold; font-size: 1.3em; }
         .logo-menu img { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--aksen-2); box-shadow: var(--box-shadow-neon); }
         .link-nav { list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; }
@@ -120,55 +75,25 @@
         .link-nav a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0; background: var(--gradasi-neon); transition: width 0.3s; }
         .link-nav a:hover { color: var(--aksen-2); text-shadow: var(--text-shadow-neon); }
         .link-nav a:hover::after { width: 100%; }
-        
         #anggota-tim-nav { background: var(--gradasi-neon); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; }
         #anggota-tim-nav::after { display: none; } 
         #anggota-tim-nav:hover { filter: brightness(1.2); text-shadow: var(--text-shadow-neon); }
 
         /* ====================================================== */
-        /* Bagian Kepala (Header) & GLITCH EFFECT                 */
+        /* HEADER & GLITCH EFFECT                                 */
         /* ====================================================== */
-        header {
-            background-image: 
-                linear-gradient(to bottom, rgba(10, 10, 12, 0.8), rgba(10, 10, 12, 0.4), rgba(10, 10, 12, 1)), 
-                url('team.jpg');
-            background-size: cover; background-position: center; background-attachment: fixed; 
-            padding: 150px 20px; text-align: center; position: relative; overflow: hidden;
-        }
-
+        header { background-image: linear-gradient(to bottom, rgba(10, 10, 12, 0.8), rgba(10, 10, 12, 0.4), rgba(10, 10, 12, 1)), url('team.jpg'); background-size: cover; background-position: center; background-attachment: fixed; padding: 150px 20px; text-align: center; position: relative; overflow: hidden; }
         header::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 5px; background: var(--gradasi-neon); box-shadow: var(--box-shadow-neon); }
-
-        .glitch-teks {
-            margin: 0; font-size: 5em; background: var(--gradasi-neon); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 10px rgba(255, 18, 0, 0.6)); margin-bottom: 10px; position: relative; display: inline-block; animation: glitchAnim 3s infinite;
-        }
-
-        @keyframes glitchAnim {
-            0%, 95%, 100% { transform: translate(0); text-shadow: none; }
-            96% { transform: translate(-3px, 2px); text-shadow: 3px 0 red, -3px 0 blue; }
-            97% { transform: translate(3px, -2px); text-shadow: -3px 0 red, 3px 0 blue; }
-            98% { transform: translate(-3px, 2px); text-shadow: none; }
-        }
-
-        .subtitle-animasi {
-            font-family: 'Rajdhani', sans-serif; font-size: 1.8em; font-weight: 700; color: var(--teks-putih); text-transform: uppercase;
-            margin-top: 0; margin-bottom: 30px; letter-spacing: 5px; text-shadow: 0 0 15px rgba(255, 145, 0, 0.5);
-            animation: blurReveal 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; animation-delay: 0.5s; opacity: 0; 
-        }
+        .glitch-teks { margin: 0; font-size: 5em; background: var(--gradasi-neon); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 10px rgba(255, 18, 0, 0.6)); margin-bottom: 10px; position: relative; display: inline-block; animation: glitchAnim 3s infinite; }
+        @keyframes glitchAnim { 0%, 95%, 100% { transform: translate(0); text-shadow: none; } 96% { transform: translate(-3px, 2px); text-shadow: 3px 0 red, -3px 0 blue; } 97% { transform: translate(3px, -2px); text-shadow: -3px 0 red, 3px 0 blue; } 98% { transform: translate(-3px, 2px); text-shadow: none; } }
+        .subtitle-animasi { font-family: 'Rajdhani', sans-serif; font-size: 1.8em; font-weight: 700; color: var(--teks-putih); text-transform: uppercase; margin-top: 0; margin-bottom: 30px; letter-spacing: 5px; text-shadow: 0 0 15px rgba(255, 145, 0, 0.5); animation: blurReveal 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; animation-delay: 0.5s; opacity: 0; }
         .subtitle-animasi span { color: var(--aksen-2); }
-
-        @keyframes blurReveal {
-            0% { filter: blur(12px); opacity: 0; transform: translateY(-20px); letter-spacing: -5px; }
-            100% { filter: blur(0); opacity: 1; transform: translateY(0); letter-spacing: 5px; }
-        }
+        @keyframes blurReveal { 0% { filter: blur(12px); opacity: 0; transform: translateY(-20px); letter-spacing: -5px; } 100% { filter: blur(0); opacity: 1; transform: translateY(0); letter-spacing: 5px; } }
 
         /* ====================================================== */
-        /* PITA MARQUEE (TEKS BERJALAN) - DIBUAT LURUS SEJAJAR    */
+        /* PITA MARQUEE (TEKS BERJALAN)                           */
         /* ====================================================== */
-        .marquee-container {
-            background: var(--aksen-2); color: #000; padding: 12px 0; overflow: hidden; position: relative; margin-top: 0; margin-bottom: 40px;
-            box-shadow: 0 5px 20px rgba(255, 145, 0, 0.4); z-index: 10; font-family: 'Oswald', sans-serif; font-weight: 700; letter-spacing: 2px; font-size: 1.2em;
-        }
+        .marquee-container { background: var(--aksen-2); color: #000; padding: 12px 0; overflow: hidden; position: relative; margin-top: 0; margin-bottom: 40px; box-shadow: 0 5px 20px rgba(255, 145, 0, 0.4); z-index: 10; font-family: 'Oswald', sans-serif; font-weight: 700; letter-spacing: 2px; font-size: 1.2em; }
         .marquee-content { display: flex; white-space: nowrap; animation: jalanTeks 20s linear infinite; }
         .marquee-content span { padding: 0 40px; }
         @keyframes jalanTeks { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
@@ -177,210 +102,110 @@
         /* MAIN CONTENT & CARDS                                   */
         /* ====================================================== */
         main { max-width: 1200px; margin: 40px auto; padding: 0 20px; position: relative; z-index: 2; }
-
-        section {
-            background-color: var(--latar-kartu); padding: 40px; margin-bottom: 40px; border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: border 0.3s;
-        }
+        section { background-color: var(--latar-kartu); padding: 40px; margin-bottom: 40px; border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: border 0.3s; }
         section:hover { border-color: rgba(255, 145, 0, 0.2); }
-
         h2 { background: var(--gradasi-neon); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 2.2em; display: inline-block; margin-top: 0; margin-bottom: 20px; position: relative; }
         h2::after { content: ''; display: block; width: 50px; height: 3px; background: var(--gradasi-neon); margin-top: 5px; border-radius: 2px; }
 
         /* ====================================================== */
         /* ANIMASI TEKS ANNIVERSARY MENYALA & API                 */
         /* ====================================================== */
-        .teks-anniv-menyala {
-            font-size: 3.2em; color: #ffffff; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 2px;
-            display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 10px;
-            animation: neonFlicker 1.5s infinite alternate; background: none; -webkit-text-fill-color: #fff; 
-        }
+        .teks-anniv-menyala { font-size: 3.2em; color: #ffffff; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 2px; display: flex; justify-content: center; align-items: center; gap: 15px; margin-bottom: 10px; animation: neonFlicker 1.5s infinite alternate; background: none; -webkit-text-fill-color: #fff; }
         .teks-anniv-menyala::after { display: none; } 
-
-        @keyframes neonFlicker {
-            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { text-shadow: 0 0 5px #fff, 0 0 10px #ff1200, 0 0 20px #ff1200, 0 0 40px #ff9100, 0 0 80px #ff9100; }
-            20%, 24%, 55% { text-shadow: none; }
-        }
-
+        @keyframes neonFlicker { 0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { text-shadow: 0 0 5px #fff, 0 0 10px #ff1200, 0 0 20px #ff1200, 0 0 40px #ff9100, 0 0 80px #ff9100; } 20%, 24%, 55% { text-shadow: none; } }
         .api-berkobar { display: inline-block; animation: apiGerak 0.5s infinite alternate ease-in-out; filter: drop-shadow(0 0 15px rgba(255, 145, 0, 1)); }
-
-        @keyframes apiGerak {
-            0% { transform: scale(1) rotate(-5deg); opacity: 0.9; filter: drop-shadow(0 0 10px rgba(255, 18, 0, 0.8)); }
-            50% { transform: scale(1.15) rotate(5deg); opacity: 1; filter: drop-shadow(0 0 25px rgba(255, 145, 0, 1)); }
-            100% { transform: scale(0.95) rotate(-2deg); opacity: 0.8; filter: drop-shadow(0 0 15px rgba(255, 18, 0, 0.9)); }
-        }
-
-        /* ====================================================== */
-        /* COUNTDOWN TIMER STYLES                                 */
-        /* ====================================================== */
+        @keyframes apiGerak { 0% { transform: scale(1) rotate(-5deg); opacity: 0.9; filter: drop-shadow(0 0 10px rgba(255, 18, 0, 0.8)); } 50% { transform: scale(1.15) rotate(5deg); opacity: 1; filter: drop-shadow(0 0 25px rgba(255, 145, 0, 1)); } 100% { transform: scale(0.95) rotate(-2deg); opacity: 0.8; filter: drop-shadow(0 0 15px rgba(255, 18, 0, 0.9)); } }
         .countdown-wrapper { display: flex; justify-content: center; gap: 20px; margin-top: 20px; margin-bottom: 10px; flex-wrap: wrap; }
         .waktu-box { background: var(--latar-input); border: 2px solid var(--aksen-1); border-radius: 12px; padding: 15px 25px; min-width: 90px; box-shadow: 0 0 15px rgba(255, 18, 0, 0.3); animation: borderGlow 2s infinite alternate; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .waktu-box span { font-family: 'Oswald', sans-serif; font-size: 3em; font-weight: 700; background: var(--gradasi-neon); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1; margin-bottom: 5px; animation: pulseText 1.5s infinite alternate; }
         .waktu-box p { margin: 0; font-size: 0.9em; font-weight: 600; color: var(--teks-abu); text-transform: uppercase; letter-spacing: 2px; }
-        
         @keyframes borderGlow { 0% { box-shadow: 0 0 5px rgba(255, 18, 0, 0.2); border-color: rgba(255, 18, 0, 0.5); } 100% { box-shadow: 0 0 25px rgba(255, 145, 0, 0.6); border-color: rgba(255, 145, 0, 1); transform: translateY(-3px); } }
         @keyframes pulseText { 0% { filter: drop-shadow(0 0 2px rgba(255, 18, 0, 0.4)); transform: scale(1); } 100% { filter: drop-shadow(0 0 10px rgba(255, 145, 0, 0.8)); transform: scale(1.08); } }
 
         /* ====================================================== */
-        /* BADGE JABATAN (OPTIMAL DI HP & LAPTOP)                 */
+        /* AUDIO EQUALIZER (UNTUK RADIO VIBES)                    */
         /* ====================================================== */
-        .badge-role {
-            position: absolute; 
-            top: 15px; 
-            right: 15px; 
-            background: linear-gradient(135deg, #16161a, #0a0a0c);
-            border: 2px solid var(--aksen-2);
-            color: var(--teks-putih);
-            padding: 6px 14px; 
-            font-size: 0.8em; 
-            font-family: 'Oswald', sans-serif; 
-            font-weight: 700;
-            border-radius: 30px; 
-            text-transform: uppercase;
-            box-shadow: 0 4px 10px rgba(255, 145, 0, 0.3);
-            z-index: 20; 
-            transform: translateZ(30px); 
-            cursor: pointer; 
-            display: flex; 
-            align-items: center; 
-            gap: 6px;
-            transition: all 0.3s ease;
-        }
-        
-        .badge-role:hover {
-            background: var(--aksen-2);
-            color: #000;
-            box-shadow: 0 0 15px var(--aksen-2);
-            transform: translateZ(35px) scale(1.05);
-        }
-
-        .badge-role:hover i {
-            color: #000;
-            filter: none;
-        }
-        
-        .badge-role i { font-size: 1.2em; color: var(--aksen-2); filter: drop-shadow(0 0 5px var(--aksen-1)); transition: color 0.3s; }
-
-        /* Animasi Icon */
-        .anim-petir { animation: animPetir 2s infinite alternate; }
-        @keyframes animPetir { 0% { transform: scale(1); filter: drop-shadow(0 0 5px #ff9100); } 100% { transform: scale(1.2); filter: drop-shadow(0 0 15px #ff1200); } }
-
-        .anim-tameng { animation: animTameng 2s infinite; }
-        @keyframes animTameng { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
-
-        .anim-kompas { animation: animKompas 3s infinite ease-in-out; }
-        @keyframes animKompas { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(20deg); } }
-
-        .anim-koin { animation: animKoin 3s infinite linear; }
-        @keyframes animKoin { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(360deg); } }
-
-        .anim-peta { animation: animPeta 2s infinite ease-in-out; }
-        @keyframes animPeta { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
-
-        .anim-sapu { animation: animSapu 2s infinite; }
-        @keyframes animSapu { 0%, 100% { transform: translateX(0) rotate(0deg); } 50% { transform: translateX(3px) rotate(10deg); } }
-
-        .anim-toa { animation: animToa 1.5s infinite; }
-        @keyframes animToa { 0%, 100% { transform: scale(1) rotate(0deg); } 20% { transform: scale(1.1) rotate(-8deg); } 40% { transform: scale(1.1) rotate(8deg); } }
-
-        .anim-kamera { animation: animKamera 2s infinite; }
-        @keyframes animKamera { 0%, 90%, 100% { opacity: 1; } 95% { opacity: 0.4; filter: drop-shadow(0 0 10px #fff); } }
-
-        .anim-gir { animation: animGir 4s infinite linear; }
-        @keyframes animGir { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .equalizer-container { display: flex; gap: 6px; height: 50px; align-items: flex-end; margin-top: 15px; }
+        .eq-bar { width: 8px; border-radius: 4px 4px 0 0; background: var(--aksen-1); animation: eqBar 1s infinite alternate ease-in-out; }
+        .eq-bar:nth-child(2n) { background: var(--aksen-2); animation-direction: alternate-reverse; }
+        .eq-bar:nth-child(1) { animation-duration: 0.6s; }
+        .eq-bar:nth-child(2) { animation-duration: 0.9s; }
+        .eq-bar:nth-child(3) { animation-duration: 0.7s; }
+        .eq-bar:nth-child(4) { animation-duration: 1.1s; }
+        .eq-bar:nth-child(5) { animation-duration: 0.8s; }
+        .eq-bar:nth-child(6) { animation-duration: 1.2s; }
+        .eq-bar:nth-child(7) { animation-duration: 0.5s; }
+        @keyframes eqBar { 0% { height: 10px; } 100% { height: 50px; } }
 
         /* ====================================================== */
-        /* KARTU & GRID UMUM                                      */
-        /* ====================================================== */
-        .barisan-kartu { display: flex; flex-wrap: wrap; gap: 25px; justify-content: center; margin-top: 30px; perspective: 1000px; }
-        
-        .kartu {
-            background-color: var(--latar-input); padding: 25px; border-radius: 12px; text-align: center;
-            width: calc(33.333% - 40px); min-width: 280px; box-sizing: border-box; border: 1px solid transparent;
-            display: flex; flex-direction: column; justify-content: space-between;
-            transition: transform 0.1s ease, box-shadow 0.3s ease; 
-            transform-style: preserve-3d;
-            position: relative; 
-            overflow: hidden; 
-        }
-
-        .kartu:hover { border-color: rgba(255, 145, 0, 0.3); box-shadow: 0 15px 30px rgba(255, 18, 0, 0.3); z-index: 2; }
-        .kartu img { width: 100%; height: 220px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; transition: transform 0.3s; transform: translateZ(20px); position: relative; z-index: 2;}
-        .kartu h3 { color: var(--teks-putih); margin-bottom: 5px; font-size: 1.4em; transform: translateZ(30px); position: relative; z-index: 2;}
-        .kartu p { transform: translateZ(15px); position: relative; z-index: 2; }
-        
-        /* Efek Pantulan Cahaya Hologram */
-        .kartu::after {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255, 145, 0, 0.15) 0%, transparent 60%);
-            opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 10; border-radius: 12px;
-        }
-        .kartu:hover::after { opacity: 1; }
-
-        /* ====================================================== */
-        /* TOMBOL SOSMED ELEGAN PADA KARTU                        */
-        /* ====================================================== */
-        .sosmed-links {
-            margin-top: 15px; display: flex; flex-direction: column; gap: 10px; transform: translateZ(20px); position: relative; z-index: 11;
-        }
-        .sosmed-links a {
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--teks-putih); text-decoration: none; padding: 8px 0; border-radius: 8px;
-            font-size: 0.9em; font-weight: 600; transition: all 0.3s; position: relative; overflow: hidden;
-        }
-        .sosmed-links a::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent); transition: left 0.5s ease;
-        }
-        .sosmed-links a:hover::before { left: 100%; }
-        .sosmed-links a:hover { background: var(--aksen-2); color: #000; border-color: var(--aksen-2); box-shadow: 0 0 15px rgba(255, 145, 0, 0.5); transform: scale(1.05); }
-
-        /* ====================================================== */
-        /* TOMBOL (BUTTONS)                                       */
-        /* ====================================================== */
-        .tombol { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--gradasi-neon); color: #000; padding: 12px 30px; text-decoration: none; border-radius: 30px; font-weight: 700; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 1px; margin: 10px 5px; transition: all 0.3s; border: none; box-shadow: var(--box-shadow-neon); cursor: pointer; }
-        .tombol i { font-size: 1.3em; }
-        .tombol:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(255, 18, 0, 0.5); filter: brightness(1.1); }
-        .wadah-tombol { display: flex; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
-
-        .tombol-pulse { animation: tombolDenyut 2s infinite; }
-        @keyframes tombolDenyut { 0% { box-shadow: 0 0 0 0 rgba(255, 18, 0, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(255, 18, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 18, 0, 0); } }
-
-        /* ====================================================== */
-        /* GALERI (BEBAS SCANLINES & SINEMATIK)                   */
+        /* GALERI LIGHTBOX                                        */
         /* ====================================================== */
         .grid-galeri { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin-top: 30px; }
-        
-        .item-galeri { overflow: hidden; border-radius: 10px; height: 250px; position: relative; border: 2px solid transparent; transition: all 0.3s; z-index: 9999; }
+        .item-galeri { overflow: hidden; border-radius: 10px; height: 250px; position: relative; border: 2px solid transparent; transition: all 0.3s; z-index: 9999; cursor: pointer; }
         .item-galeri:hover { border-color: var(--aksen-2); box-shadow: var(--box-shadow-neon); }
         .item-galeri img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease, filter 0.5s ease; filter: grayscale(40%) contrast(1.1); }
         .item-galeri:hover img { transform: scale(1.1) rotate(1deg); filter: grayscale(0%) contrast(1.2); }
-        
         .teks-galeri { position: absolute; bottom: 0; left: 0; width: 100%; background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 50%, transparent 100%); color: #fff; padding: 20px; text-align: left; font-size: 0.9em; font-weight: 600; box-sizing: border-box; pointer-events: none; transform: translateY(10px); transition: all 0.3s; opacity: 0; }
         .item-galeri:hover .teks-galeri { transform: translateY(0); opacity: 1; }
-
         section ul { list-style: none; padding-left: 10px; }
         section ul li { position: relative; padding-left: 25px; margin-bottom: 10px; color: var(--teks-abu); }
         section ul li::before { content: '➢'; position: absolute; left: 0; color: var(--aksen-2); text-shadow: var(--text-shadow-neon); }
 
         /* ====================================================== */
-        /* TOMBOL KEMBALI KE ATAS (BACK TO TOP)                   */
+        /* KARTU & GRID UMUM                                      */
         /* ====================================================== */
-        #btn-atas {
-            position: fixed; bottom: 30px; right: 30px; background: var(--gradasi-neon); color: #000; width: 50px; height: 50px; border-radius: 50%;
-            display: flex; justify-content: center; align-items: center; font-size: 1.5em; border: none; cursor: pointer;
-            box-shadow: var(--box-shadow-neon); opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 999;
-        }
+        .barisan-kartu { display: flex; flex-wrap: wrap; gap: 25px; justify-content: center; margin-top: 30px; perspective: 1000px; }
+        .kartu { background-color: var(--latar-input); padding: 25px; border-radius: 12px; text-align: center; width: calc(33.333% - 40px); min-width: 280px; box-sizing: border-box; border: 1px solid transparent; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.1s ease, box-shadow 0.3s ease; transform-style: preserve-3d; position: relative; overflow: hidden; }
+        .kartu:hover { border-color: rgba(255, 145, 0, 0.3); box-shadow: 0 15px 30px rgba(255, 18, 0, 0.3); z-index: 2; transform: translateY(-5px); }
+        .kartu img { width: 100%; height: 220px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; transition: transform 0.3s; transform: translateZ(20px); position: relative; z-index: 2;}
+        .kartu h3 { color: var(--teks-putih); margin-bottom: 5px; font-size: 1.4em; transform: translateZ(30px); position: relative; z-index: 2; background: none; -webkit-text-fill-color: initial;}
+        .kartu h3::after { display: none; }
+        .kartu p { transform: translateZ(15px); position: relative; z-index: 2; }
+        .kartu::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(255, 145, 0, 0.15) 0%, transparent 60%); opacity: 0; transition: opacity 0.3s; pointer-events: none; z-index: 10; border-radius: 12px; }
+        .kartu:hover::after { opacity: 1; }
+
+        /* ====================================================== */
+        /* BADGE JABATAN (OPTIMAL DI HP & LAPTOP)                 */
+        /* ====================================================== */
+        .badge-role { position: absolute; top: 15px; right: 15px; background: linear-gradient(135deg, #16161a, #0a0a0c); border: 2px solid var(--aksen-2); color: var(--teks-putih); padding: 6px 14px; font-size: 0.8em; font-family: 'Oswald', sans-serif; font-weight: 700; border-radius: 30px; text-transform: uppercase; box-shadow: 0 4px 10px rgba(255, 145, 0, 0.3); z-index: 20; transform: translateZ(30px); cursor: pointer; display: flex; align-items: center; gap: 6px; transition: all 0.3s ease; }
+        .badge-role:hover { background: var(--aksen-2); color: #000; box-shadow: 0 0 15px var(--aksen-2); transform: translateZ(35px) scale(1.05); }
+        .badge-role:hover i { color: #000; filter: none; }
+        .badge-role i { font-size: 1.2em; color: var(--aksen-2); filter: drop-shadow(0 0 5px var(--aksen-1)); transition: color 0.3s; }
+
+        /* Animasi Icon */
+        .anim-petir { animation: animPetir 2s infinite alternate; } @keyframes animPetir { 0% { transform: scale(1); filter: drop-shadow(0 0 5px #ff9100); } 100% { transform: scale(1.2); filter: drop-shadow(0 0 15px #ff1200); } }
+        .anim-tameng { animation: animTameng 2s infinite; } @keyframes animTameng { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+        .anim-kompas { animation: animKompas 3s infinite ease-in-out; } @keyframes animKompas { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(20deg); } }
+        .anim-koin { animation: animKoin 3s infinite linear; } @keyframes animKoin { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(360deg); } }
+        .anim-peta { animation: animPeta 2s infinite ease-in-out; } @keyframes animPeta { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        .anim-sapu { animation: animSapu 2s infinite; } @keyframes animSapu { 0%, 100% { transform: translateX(0) rotate(0deg); } 50% { transform: translateX(3px) rotate(10deg); } }
+        .anim-toa { animation: animToa 1.5s infinite; } @keyframes animToa { 0%, 100% { transform: scale(1) rotate(0deg); } 20% { transform: scale(1.1) rotate(-8deg); } 40% { transform: scale(1.1) rotate(8deg); } }
+        .anim-kamera { animation: animKamera 2s infinite; } @keyframes animKamera { 0%, 90%, 100% { opacity: 1; } 95% { opacity: 0.4; filter: drop-shadow(0 0 10px #fff); } }
+        .anim-gir { animation: animGir 4s infinite linear; } @keyframes animGir { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* ====================================================== */
+        /* TOMBOL SOSMED & NAVIGASI BAWAH                         */
+        /* ====================================================== */
+        .sosmed-links { margin-top: 15px; display: flex; flex-direction: column; gap: 10px; transform: translateZ(20px); position: relative; z-index: 11; }
+        .sosmed-links a { display: flex; align-items: center; justify-content: center; gap: 8px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: var(--teks-putih); text-decoration: none; padding: 8px 0; border-radius: 8px; font-size: 0.9em; font-weight: 600; transition: all 0.3s; position: relative; overflow: hidden; }
+        .sosmed-links a::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent); transition: left 0.5s ease; }
+        .sosmed-links a:hover::before { left: 100%; }
+        .sosmed-links a:hover { background: var(--aksen-2); color: #000; border-color: var(--aksen-2); box-shadow: 0 0 15px rgba(255, 145, 0, 0.5); transform: scale(1.05); }
+        .tombol { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--gradasi-neon); color: #000; padding: 12px 30px; text-decoration: none; border-radius: 30px; font-weight: 700; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 1px; margin: 10px 5px; transition: all 0.3s; border: none; box-shadow: var(--box-shadow-neon); cursor: pointer; }
+        .tombol i { font-size: 1.3em; }
+        .tombol:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(255, 18, 0, 0.5); filter: brightness(1.1); }
+        .wadah-tombol { display: flex; flex-wrap: wrap; justify-content: center; margin-top: 20px; }
+        .tombol-pulse { animation: tombolDenyut 2s infinite; }
+        @keyframes tombolDenyut { 0% { box-shadow: 0 0 0 0 rgba(255, 18, 0, 0.7); } 70% { box-shadow: 0 0 0 15px rgba(255, 18, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 18, 0, 0); } }
+        #btn-atas { position: fixed; bottom: 30px; right: 30px; background: var(--gradasi-neon); color: #000; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.5em; border: none; cursor: pointer; box-shadow: var(--box-shadow-neon); opacity: 0; visibility: hidden; transition: all 0.3s; z-index: 999; }
         #btn-atas.tampil { opacity: 1; visibility: visible; }
         #btn-atas:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(255, 145, 0, 0.6); }
 
-        /* ====================================================== */
-        /* FOOTER & MODAL                                         */
-        /* ====================================================== */
         footer { text-align: center; padding: 40px 20px; background-color: #050506; color: var(--teks-abu); border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.9em; position: relative; z-index: 2; }
-        footer p { margin: 5px 0; }
         
+        /* ====================================================== */
+        /* MODALS (INFO, LIGHTBOX, DAFTAR ANGGOTA)                */
+        /* ====================================================== */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center; z-index: 10005; opacity: 0; visibility: hidden; transition: all 0.3s ease; backdrop-filter: blur(5px); }
         .modal-overlay.aktif { opacity: 1; visibility: visible; }
         .modal-konten { background: var(--latar-kartu); width: 90%; max-width: 800px; max-height: 85vh; border-radius: 12px; padding: 30px 20px; position: relative; overflow-y: auto; border: 2px solid var(--aksen-1); box-shadow: 0 0 50px rgba(255, 18, 0, 0.3); }
@@ -388,10 +213,15 @@
         .tutup-modal { position: absolute; top: 15px; right: 20px; font-size: 28px; }
         .tutup-modal:hover, .tutup-zoom:hover { color: var(--aksen-1); text-shadow: 0 0 10px var(--aksen-1); }
         
-        /* Modal Info Peran */
         #modalInfoPeran .modal-konten { max-width: 450px; text-align: center; padding: 40px 30px; border-color: var(--aksen-2); }
-        #modalInfoPeran h3 { color: var(--aksen-2); margin-top: 0; font-size: 1.8em; }
+        #modalInfoPeran h3 { color: var(--aksen-2); margin-top: 0; font-size: 1.8em; background: none; -webkit-text-fill-color: initial; }
+        #modalInfoPeran h3::after { display: none; }
         #modalInfoPeran p { color: var(--teks-putih); font-size: 1.05em; line-height: 1.7; margin-top: 15px; }
+
+        #modalLightbox .modal-konten { background: transparent; box-shadow: none; border: none; max-width: 900px; text-align: center; overflow: visible; }
+        #modalLightbox img { max-width: 100%; max-height: 80vh; border-radius: 8px; box-shadow: 0 0 30px rgba(255, 18, 0, 0.5); }
+        #modalLightbox .tutup-modal { color: #fff; top: -30px; right: 0; font-size: 35px; }
+        #teksLightbox { margin-top: 15px; color: var(--aksen-2); font-size: 1.2em; text-shadow: 0 0 10px rgba(255, 145, 0, 0.8); font-family: 'Oswald', sans-serif; }
 
         .grid-daftar-anggota { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; margin-top: 20px; }
         .kartu-kecil { display: flex; align-items: center; gap: 15px; background: var(--latar-input); padding: 12px; border-radius: 8px; transition: transform 0.2s; overflow: hidden; border: 1px solid transparent; }
@@ -429,15 +259,7 @@
             .waktu-box { padding: 10px 15px; min-width: 70px; }
             .waktu-box span { font-size: 2.2em; }
             .kartu { width: 100%; min-width: unset; transform: none !important; } 
-            
-            /* Penyesuaian khusus badge di layar HP */
-            .badge-role { 
-                top: 12px; 
-                right: 12px; 
-                padding: 4px 10px; 
-                font-size: 0.75em; 
-            }
-
+            .badge-role { top: 12px; right: 12px; padding: 4px 10px; font-size: 0.75em; }
             .grid-galeri { grid-template-columns: 1fr; }
             .wadah-tombol { flex-direction: column; align-items: stretch; }
             .tombol { margin: 5px 0; } 
@@ -446,7 +268,7 @@
             .tutup-zoom { right: 0; }
         }
 
-        /* ANIMASI SCROLL */
+        /* ANIMASI SCROLL UMUM */
         @keyframes turunDariAtas { 0% { opacity: 0; transform: translateY(-30px); } 100% { opacity: 1; transform: translateY(0); } }
         .efek-gulir { opacity: 0; transform: translateY(40px); transition: all 0.6s ease-out; visibility: hidden; }
         .efek-gulir.muncul { opacity: 1; transform: translateY(0); visibility: visible; }
@@ -454,7 +276,6 @@
 </head>
 <body>
 
-    <!-- 1. ELEMEN TAMBAHAN: EFEK SCANLINES & SCROLL PROGRESS BAR -->
     <div class="scanlines"></div>
     <div id="scroll-progress"></div>
 
@@ -464,15 +285,17 @@
         <h3 style="margin-top: 20px; color: var(--aksen-2); font-family: 'Oswald', sans-serif; letter-spacing: 2px; animation: pulseText 1s infinite alternate;">MEMUAT ASPAL...</h3>
     </div>
 
+    <!-- NAVBAR (UPDATED TAUTAN KE RADIO, TENTANG & ADMIN) -->
     <nav class="navbar">
         <div class="logo-menu">
             <img src="logo.jpg" alt="Logo Tura Turu" onerror="this.src='https://via.placeholder.com/45/ff5722/ffffff?text=TT'">
             <span>TEAM TURA TURU</span>
         </div>
         <ul class="link-nav">
-            <li><a href="#sambutan-anniv">Anniversary</a></li>
+            <li><a href="#radio-syndicate">Radio</a></li>
             <li><a href="#galeri">Galeri</a></li>
             <li><a href="#tentang-kami">Tentang</a></li>
+            <li><a href="#admin-kolaborasi">Admin</a></li>
             <li><a href="#jadwal-kegiatan">Jadwal</a></li>
             <li><a href="#anggota-tim" id="anggota-tim-nav">👥 Anggota</a></li>
         </ul>
@@ -487,7 +310,6 @@
         </div>
     </header>
 
-    <!-- MARQUEE TAPE (LURUS SEJAJAR) -->
     <div class="marquee-container">
         <div class="marquee-content">
             <span>⚠️ SOLIDARITAS TANPA BATAS ⚠️</span>
@@ -503,15 +325,11 @@
 
     <main>
         
-        <!-- MENU SAMBUTAN 2ND ANNIVERSARY & COUNTDOWN -->
+        <!-- ANNIVERSARY COUNTDOWN -->
         <section id="sambutan-anniv" class="efek-gulir" style="text-align: center; border: 2px solid var(--aksen-1); box-shadow: 0 0 30px rgba(255, 18, 0, 0.2); position: relative; overflow: hidden;">
-            
             <h2 class="teks-anniv-menyala">
-                <span class="api-berkobar">🔥</span> 
-                2ND ANNIVERSARY 
-                <span class="api-berkobar">🔥</span>
+                <span class="api-berkobar">🔥</span> 2ND ANNIVERSARY <span class="api-berkobar">🔥</span>
             </h2>
-            
             <p style="font-size: 1.2em; color: var(--aksen-2); font-weight: bold; margin-bottom: 5px;">2 Agustus 2024 - 2 Agustus 2026</p>
             
             <div id="countdown-container" class="countdown-wrapper">
@@ -528,20 +346,68 @@
             <h3 style="margin-top: 30px; background: var(--gradasi-neon); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 2px; font-size: 1.8em;">#TEAMTuraTuru2Tahun</h3>
         </section>
 
-        <!-- KONTEN ASLI (Galeri, Tentang, Jadwal) -->
+        <!-- SYNDICATE RADIO (NIGHT RIDE VIBES) -->
+        <section id="radio-syndicate" class="efek-gulir" style="background: linear-gradient(135deg, #0a0a0c, #16161a); border: 1px solid var(--aksen-1); border-radius: 15px; position: relative; overflow: hidden; padding: 0; box-shadow: 0 10px 40px rgba(255, 18, 0, 0.2);">
+            <div style="display: flex; flex-wrap: wrap;">
+                
+                <div style="flex: 1; min-width: 300px; padding: 40px; display: flex; flex-direction: column; justify-content: center;">
+                    <h2 style="font-size: 2.8em; margin-top: 0; margin-bottom: 5px; display: flex; align-items: center; gap: 15px; background: none; -webkit-text-fill-color: initial;">
+                        <i class="fas fa-headphones-alt" style="color: var(--aksen-2); animation: tombolDenyut 2s infinite; text-shadow: 0 0 15px var(--aksen-2);"></i> 
+                        <span style="background: var(--gradasi-neon); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">RADIO</span>
+                    </h2>
+                    <p style="color: var(--teks-putih); font-size: 1.3em; font-weight: bold; font-family: 'Rajdhani', sans-serif; letter-spacing: 3px; margin-top: 0; margin-bottom: 20px;">NIGHT RIDE VIBES</p>
+                    
+                    <p style="color: var(--teks-abu); line-height: 1.8; margin-bottom: 30px;">
+                        Pasang helmmu, putar gas, dan naikkan volume. Ini adalah frekuensi resmi <strong>Tura Turu Syndicate</strong>. Kumpulan trek andalan yang selalu menemani roda kami berputar membelah sunyinya aspal di malam hari.
+                    </p>
+                    
+                    <div class="equalizer-container">
+                        <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+                        <div class="eq-bar"></div><div class="eq-bar"></div><div class="eq-bar"></div>
+                        <div class="eq-bar"></div>
+                    </div>
+                </div>
+                
+                <div style="flex: 1; min-width: 300px; background: #000; padding: 30px; display: flex; align-items: center; justify-content: center; border-left: 1px solid rgba(255,255,255,0.1);">
+                    <iframe style="border-radius:12px; box-shadow: 0 0 25px rgba(255, 145, 0, 0.2);" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXc8kgYqQLKWv?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- GALERI -->
         <section id="galeri" class="efek-gulir">
             <h2>Galeri & Kenangan Aspal</h2>
-            <p style="text-align: center; color: var(--teks-abu);">Jejak roda, sisa tawa, dan cerita persaudaraan di setiap kilometer perjalanan.</p>
+            <p style="text-align: center; color: var(--teks-abu);">Jejak roda, sisa tawa, dan cerita persaudaraan di setiap kilometer perjalanan. Klik foto untuk memperbesar.</p>
            <div class="grid-galeri">
-                <div class="item-galeri"><img src="bb1.jpg" alt="ACARA BUKBER"><div class="teks-galeri">ACARA BUKBER BERSAMA TEAM LEDOLD.YKC</div></div>
-                <div class="item-galeri"><img src="bb2.jpg" alt="ACARA BUKBER"><div class="teks-galeri">ACARA BUKBER BERSAMA TEAM LEDOLD.YKC</div></div>
-                <div class="item-galeri"><img src="nr.jpg" alt="NIGHT RIDE"><div class="teks-galeri">NIGHT RIDE BERSAMA TEAM LEDOLD.YKC</div></div>
-                <div class="item-galeri"><img src="homearif.jpg" alt="KUMPUL"><div class="teks-galeri">ACARA KUMPUL BERSAMA DI HOME ARIF</div></div>
-                <div class="item-galeri"><img src="rumahpandu.jpg" alt="KUMPUL"><div class="teks-galeri">FOTO BERSAMA DI HOME PANDU</div></div>
-                <div class="item-galeri"><img src="homearif1.jpg" alt="KUMPUL"><div class="teks-galeri">ACARA KUMPUL BERSAMA DI HOME ARIF</div></div>
+                <div class="item-galeri" onclick="bukaLightbox(this)">
+                    <img src="bb1.jpg" alt="ACARA BUKBER">
+                    <div class="teks-galeri">ACARA BUKBER BERSAMA TEAM LEDOLD.YKC</div>
+                </div>
+                <div class="item-galeri" onclick="bukaLightbox(this)">
+                    <img src="bb2.jpg" alt="ACARA BUKBER">
+                    <div class="teks-galeri">ACARA BUKBER BERSAMA TEAM LEDOLD.YKC</div>
+                </div>
+                <div class="item-galeri" onclick="bukaLightbox(this)">
+                    <img src="nr.jpg" alt="NIGHT RIDE">
+                    <div class="teks-galeri">NIGHT RIDE BERSAMA TEAM LEDOLD.YKC</div>
+                </div>
+                <div class="item-galeri" onclick="bukaLightbox(this)">
+                    <img src="homearif.jpg" alt="KUMPUL">
+                    <div class="teks-galeri">ACARA KUMPUL BERSAMA DI HOME ARIF</div>
+                </div>
+                <div class="item-galeri" onclick="bukaLightbox(this)">
+                    <img src="rumahpandu.jpg" alt="KUMPUL">
+                    <div class="teks-galeri">FOTO BERSAMA DI HOME PANDU</div>
+                </div>
+                <div class="item-galeri" onclick="bukaLightbox(this)">
+                    <img src="homearif1.jpg" alt="KUMPUL">
+                    <div class="teks-galeri">ACARA KUMPUL BERSAMA DI HOME ARIF</div>
+                </div>
             </div>
         </section>
         
+        <!-- TENTANG KAMI DIKEMBALIKAN DENGAN DESAIN RAPI -->
         <section id="tentang-kami" class="efek-gulir">
             <h2>Tentang Kami</h2>
             <p>Kami adalah sekumpulan pecinta otomotif yang menjunjung tinggi persaudaraan. Berdiri sejak tanggal <strong>2 Agustus 2024</strong>, TEAM TURA TURU bukan sekedar tempat berkumpul, melainkan keluarga di atas jalan aspal.</p>
@@ -551,30 +417,110 @@
                 <li>Menjaga ketertiban lalu lintas dan menjadi pelopor keselamatan berkendara (Safety Riding).</li>
                 <li>Mengeksplorasi keindahan alam melalui kegiatan touring yang terencana dan solid.</li>
             </ul>
-            <h4>PERATURAN KOMUNITAS</h4>
+            <h4 style="margin-top: 30px; color: var(--aksen-2);">PERATURAN KOMUNITAS</h4>
             <ul>
-                <li>Dilarang arogan di jalan.</li>
-                <li>No drugs & alcohol saat riding.</li>
-                <li>Menghormati sesama.</li>
+                <li><strong>NO AROGAN:</strong> Dilarang arogan di jalan. Jalanan milik bersama.</li>
+                <li><strong>STAY SOBER:</strong> No drugs & alcohol saat riding.</li>
+                <li><strong>RESPECT:</strong> Menghormati sesama pengguna jalan dan anggota tim.</li>
             </ul>
         </section>
 
-        <section id="jadwal-kegiatan" class="efek-gulir">
-            <h2>Agenda Rutin Kita</h2>
-            <p>Bagi kawan-kawan yang ingin merapat, berikut adalah jadwal rutin kegiatan Tura Turu Syndicate:</p>
-            <div class="barisan-kartu">
-                <div class="kartu">
-                    <h3>NightRide & Kopdar</h3>
-                    <p><strong>Setiap Malam Minggu</strong></p>
-                    <p>Titik Kumpul: Home fabian </p>
-                    <p style="font-size: 0.9em; color: var(--teks-abu);">Ngopi santai, diskusi modifikasi, dan rolling tipis membelah jalanan kota Yogyakarta.</p>
+        <!-- ====================================================== -->
+        <!-- BAGIAN ADMIN KOLABORASI (PENGGANTI SYNDICATE SUPPLY)   -->
+        <!-- ====================================================== -->
+        <section id="admin-kolaborasi" class="efek-gulir" style="position: relative; border-radius: 15px; border: 1px solid var(--aksen-2); overflow: hidden; background: linear-gradient(135deg, rgba(22, 22, 26, 0.9) 0%, rgba(10, 10, 12, 1) 100%); padding: 50px;">
+            <!-- Latar belakang aksen -->
+            <div style="position: absolute; top: -50px; left: -50px; width: 250px; height: 250px; background: radial-gradient(circle, rgba(255,145,0,0.15) 0%, transparent 70%); border-radius: 50%; pointer-events: none;"></div>
+
+            <div style="text-align: center; margin-bottom: 40px; position: relative; z-index: 2;">
+                <h2 style="font-size: 2.5em; margin-bottom: 5px; display: inline-flex; align-items: center; gap: 15px; background: none; -webkit-text-fill-color: initial;">
+                    <i class="fas fa-handshake" style="color: var(--aksen-2); filter: drop-shadow(0 0 10px var(--aksen-2));"></i> 
+                    <span style="background: var(--gradasi-neon); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">KOLABORASI & RELASI</span>
+                </h2>
+                <p style="color: var(--teks-abu); font-size: 1.1em; max-width: 600px; margin: 0 auto;">Pintu kami selalu terbuka untuk persaudaraan baru. Hubungi Admin kami untuk urusan kolaborasi, event, dan silaturahmi antar komunitas.</p>
+            </div>
+
+            <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: center; justify-content: center; position: relative; z-index: 2; background: rgba(0,0,0,0.5); padding: 30px; border-radius: 12px; border: 1px solid rgba(255, 145, 0, 0.2); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                
+                <div style="flex: 0 0 auto; position: relative;">
+                    <div style="position: absolute; top: -10px; right: -10px; background: var(--aksen-1); color: #fff; padding: 5px 15px; font-weight: bold; border-radius: 20px; font-size: 0.85em; z-index: 10; font-family: 'Oswald', sans-serif; box-shadow: 0 0 15px var(--aksen-1); transform: rotate(5deg);">HEAD ADMIN</div>
+                    <img src="mirel.jpg" alt="Mirel Admin Tura Turu" onerror="this.src='https://via.placeholder.com/250x250/16161a/ff5722?text=Mirel'" style="width: 250px; height: 250px; object-fit: cover; border-radius: 50%; border: 4px solid var(--aksen-2); box-shadow: 0 0 25px rgba(255, 145, 0, 0.4); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                </div>
+
+                <div style="flex: 1; min-width: 300px; max-width: 500px; text-align: left;">
+                    <h3 style="font-size: 2.2em; color: var(--teks-putih); margin: 0 0 5px 0; font-family: 'Oswald', sans-serif; letter-spacing: 1px; background: none; -webkit-text-fill-color: initial;">MIREL</h3>
+                    <h4 style="color: var(--aksen-2); margin: 0 0 15px 0; font-size: 1.1em; letter-spacing: 2px;">NAVIGATOR & PARTNERSHIP MANAGER</h4>
+                    
+                    <p style="color: #ccc; font-size: 1.05em; line-height: 1.8; margin-bottom: 25px; border-left: 3px solid var(--aksen-1); padding-left: 15px;">
+                        Mirel adalah sosok penting di balik layar bergeraknya Tura Turu Syndicate. Sebagai Head Admin, ia telah sukses mengundang dan mengelola banyak kolaborasi epik dengan berbagai tim dan komunitas otomotif lainnya. 
+                        <br><br>
+                        Punya ide event bareng? Mau ngajak kopdar gabungan? Langsung kontak Mirel!
+                    </p>
+
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <a href="https://www.instagram.com/mirlzzz_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="tombol" style="margin: 0; background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color: #fff;">
+                            <i class="fab fa-instagram"></i> DM via Instagram
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
+
+        <!-- JADWAL DENGAN GOOGLE MAPS EMBED & UI TAKTIS -->
+        <section id="jadwal-kegiatan" class="efek-gulir" style="position: relative; overflow: hidden;">
+            <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(255,18,0,0.1) 0%, transparent 70%); border-radius: 50%; pointer-events: none;"></div>
+            
+            <h2>Titik Kumpul & Agenda</h2>
+            <p style="color: var(--teks-abu); margin-bottom: 30px;">Siapkan kuda besimu! Mari merapat dan rasakan hangatnya persaudaraan di atas aspal.</p>
+            
+            <div style="display: flex; flex-wrap: wrap; gap: 30px; background: rgba(22, 22, 26, 0.6); border: 1px solid rgba(255, 145, 0, 0.2); border-radius: 15px; padding: 30px; box-shadow: inset 0 0 20px rgba(0,0,0,0.5), 0 10px 30px rgba(0,0,0,0.3); backdrop-filter: blur(5px);">
+                
+                <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column; justify-content: center;">
+                    <h3 style="color: var(--aksen-1); font-size: 1.8em; margin-top: 0; display: flex; align-items: center; gap: 10px; text-shadow: 0 0 10px rgba(255,18,0,0.4); background: none; -webkit-text-fill-color: initial;">
+                        <i class="fas fa-motorcycle" style="color: var(--aksen-2);"></i> Night Ride & Kopdar Rutin
+                    </h3>
+                    
+                    <div style="margin: 20px 0; display: flex; flex-direction: column; gap: 20px;">
+                        <div style="display: flex; align-items: flex-start; gap: 15px;">
+                            <div style="background: rgba(255,145,0,0.1); padding: 12px; border-radius: 10px; color: var(--aksen-2); border: 1px solid rgba(255,145,0,0.3);">
+                                <i class="fas fa-clock fa-lg"></i>
+                            </div>
+                            <div>
+                                <strong style="color: #fff; font-size: 1.1em; display: block; font-family: 'Oswald', sans-serif; letter-spacing: 1px;">WAKTU OPERASI</strong>
+                                <span style="color: var(--teks-abu); font-size: 0.95em;">Setiap Malam Minggu | 20:00 WIB - Gasss Selesai</span>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; align-items: flex-start; gap: 15px;">
+                            <div style="background: rgba(255,18,0,0.1); padding: 12px 14px; border-radius: 10px; color: var(--aksen-1); border: 1px solid rgba(255,18,0,0.3);">
+                                <i class="fas fa-map-marker-alt fa-lg"></i>
+                            </div>
+                            <div>
+                                <strong style="color: #fff; font-size: 1.1em; display: block; font-family: 'Oswald', sans-serif; letter-spacing: 1px;">POINT TIKUM</strong>
+                                <span style="color: var(--aksen-2); font-weight: bold; font-size: 0.95em;">Sesuai Titik Kumpul Oleh Admin</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p style="font-size: 0.95em; color: #ccc; line-height: 1.8; border-left: 3px solid var(--aksen-1); padding-left: 15px; margin-bottom: 25px; background: linear-gradient(90deg, rgba(255,18,0,0.05), transparent); padding-top: 10px; padding-bottom: 10px;">
+                        <em>"Bukan sekedar ngopi, ini tentang seduluran. Bahas modifikasi, cek kondisi mesin, lalu dilanjut rolling membelah dinginnya aspal Jogja. No Arogan, Full Senyum!"</em>
+                    </p>
+                    
+                    <a href="https://maps.google.com" target="_blank" class="tombol" style="align-self: flex-start; font-size: 0.85em; padding: 10px 20px;">
+                        <i class="fas fa-location-arrow"></i> Buka Google Maps
+                    </a>
+                </div>
+                
+                <div style="flex: 1; min-width: 300px; position: relative; border-radius: 12px; overflow: hidden; border: 2px solid rgba(255, 145, 0, 0.4); box-shadow: 0 0 25px rgba(255, 18, 0, 0.2);">
+                    <div style="position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.8); color: var(--aksen-2); padding: 6px 12px; border-radius: 5px; font-size: 0.8em; z-index: 10; font-weight: bold; font-family: 'Oswald', sans-serif; letter-spacing: 1px; border: 1px solid var(--aksen-2);">
+                        <i class="fas fa-satellite-dish" style="animation: tombolDenyut 2s infinite;"></i> RADAR LOKASI
+                    </div>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126438.33806434444!2d110.29606822812683!3d-7.803164016666872!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5787bd5b6bc5%3A0x21723fd4d3684f71!2sYogyakarta%2C%20Kota%20Yogyakarta%2C%20Daerah%20Istimewa%20Yogyakarta!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" width="100%" height="100%" style="border:0; min-height: 350px; filter: contrast(1.1) opacity(0.85) saturate(1.2);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                
+            </div>
+        </section>
         
-        <!-- ====================================================== -->
-        <!-- BAGIAN ANGGOTA DENGAN BADGE INTERAKTIF (KLIK UNTUK INFO) -->
-        <!-- ====================================================== -->
         <section id="anggota-tim" class="efek-gulir">
             <h2>Profil Anggota Inti</h2>
             <p style="text-align: center; color: var(--teks-abu); margin-bottom: 30px;">
@@ -753,7 +699,7 @@
 
     <footer>
         <p>&copy; 2026 "Ndlogok Makes Your Life Happy" Tura Turu Syndicate.</p>
-        <p style="font-size: 0.8em;">Instagram: <a href="https://instagram.com/turaturu_syndicate" style="color: var(--warna-aksen); text-decoration: none;">@turaturu_syndicate</a></p>
+        <p style="font-size: 0.8em;">Instagram: <a href="https://instagram.com/turaturu_syndicate" style="color: var(--aksen-2); text-decoration: none;">@turaturu_syndicate</a></p>
     </footer>
 
     <!-- TOMBOL BACK TO TOP -->
@@ -770,6 +716,16 @@
         </div>
     </div>
 
+    <!-- MODAL POPUP UNTUK LIGHTBOX GALERI -->
+    <div id="modalLightbox" class="modal-overlay" onclick="tutupLightbox(event)">
+        <div class="modal-konten">
+            <span class="tutup-modal" onclick="tutupLightboxManual()">&times;</span>
+            <img id="gambarLightbox" src="" alt="Zoom Foto">
+            <h3 id="teksLightbox">Deskripsi</h3>
+        </div>
+    </div>
+
+    <!-- MODAL DAFTAR ANGGOTA LENGKAP -->
     <div id="modalDaftar" class="modal-overlay">
         <div class="modal-konten">
             <span class="tutup-modal" onclick="tutupModalAnggota()">&times;</span>
@@ -825,6 +781,7 @@
         </div>
     </div>
 
+    <!-- MODAL ZOOM FOTO ANGGOTA -->
     <div id="modalZoomFoto" class="modal-overlay" onclick="tutupZoomFoto(event)">
         <div class="modal-zoom-konten">
             <span class="tutup-zoom" onclick="tutupZoomFoto(event)">&times;</span>
@@ -843,16 +800,31 @@
             document.getElementById('modalInfoPeran').classList.add('aktif');
             document.body.style.overflow = 'hidden';
         }
-
         function tutupInfoPeranManual() {
             document.getElementById('modalInfoPeran').classList.remove('aktif');
             document.body.style.overflow = 'auto';
         }
-
         function tutupInfoPeran(event) {
-            if (event.target.id === 'modalInfoPeran') {
-                tutupInfoPeranManual();
-            }
+            if (event.target.id === 'modalInfoPeran') { tutupInfoPeranManual(); }
+        }
+
+        // ====================================================== //
+        // LOGIKA LIGHTBOX GALERI                                 //
+        // ====================================================== //
+        function bukaLightbox(elemen) {
+            const imgSrc = elemen.querySelector('img').src;
+            const teks = elemen.querySelector('.teks-galeri').innerText;
+            document.getElementById('gambarLightbox').src = imgSrc;
+            document.getElementById('teksLightbox').innerText = teks;
+            document.getElementById('modalLightbox').classList.add('aktif');
+            document.body.style.overflow = 'hidden';
+        }
+        function tutupLightboxManual() {
+            document.getElementById('modalLightbox').classList.remove('aktif');
+            document.body.style.overflow = 'auto';
+        }
+        function tutupLightbox(event) {
+            if (event.target.id === 'modalLightbox') { tutupLightboxManual(); }
         }
 
         // ====================================================== //
@@ -865,7 +837,7 @@
         });
 
         // ====================================================== //
-        // LOGIKA EFEK TILT 3D PADA KARTU ANGGOTA & EFEK CAHAYA   //
+        // LOGIKA EFEK TILT 3D PADA KARTU ANGGOTA                 //
         // ====================================================== //
         const kartus = document.querySelectorAll('.kartu');
         kartus.forEach(kartu => {
@@ -874,15 +846,13 @@
                     const rect = kartu.getBoundingClientRect();
                     const x = e.clientX - rect.left;
                     const y = e.clientY - rect.top;
-                    
                     kartu.style.setProperty('--x', `${x}px`);
                     kartu.style.setProperty('--y', `${y}px`);
-
                     const centerX = rect.width / 2;
                     const centerY = rect.height / 2;
                     const rotateX = ((y - centerY) / centerY) * -10; 
                     const rotateY = ((x - centerX) / centerX) * 10;
-                    kartu.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
+                    kartu.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03) translateY(-5px)`;
                 }
             });
             kartu.addEventListener('mouseleave', () => {
@@ -898,17 +868,13 @@
         window.addEventListener('scroll', () => {
             const btnAtas = document.getElementById('btn-atas');
             const scrollProgress = document.getElementById('scroll-progress');
-            
             const scrollTotal = document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrollPersen = (scrollTotal / height) * 100;
             scrollProgress.style.width = scrollPersen + "%";
 
-            if (window.scrollY > 500) {
-                btnAtas.classList.add('tampil');
-            } else {
-                btnAtas.classList.remove('tampil');
-            }
+            if (window.scrollY > 500) { btnAtas.classList.add('tampil'); } 
+            else { btnAtas.classList.remove('tampil'); }
         });
 
         // ====================================================== //
@@ -946,9 +912,7 @@
                 }
             });
         }, { threshold: 0.1 });
-
-        const elemenAnimasi = document.querySelectorAll('.efek-gulir');
-        elemenAnimasi.forEach((el) => pengamat.observe(el));
+        document.querySelectorAll('.efek-gulir').forEach((el) => pengamat.observe(el));
 
         // ====================================================== //
         // LOGIKA MODAL ANGGOTA & ZOOM FOTO                       //
@@ -957,26 +921,21 @@
             document.getElementById('modalDaftar').classList.add('aktif');
             document.body.style.overflow = 'hidden'; 
         }
-
         function tutupModalAnggota() {
             document.getElementById('modalDaftar').classList.remove('aktif');
             document.body.style.overflow = 'auto'; 
         }
-
         document.getElementById('modalDaftar').addEventListener('click', function(e) {
             if(e.target === this) { tutupModalAnggota(); }
         });
-
         function bukaZoomFoto(elemenGambar, namaAnggota) {
             const modalZoom = document.getElementById('modalZoomFoto');
             const gambarZoom = document.getElementById('gambarZoom');
             const teksNama = document.getElementById('namaZoom');
-            
             gambarZoom.src = elemenGambar.src; 
             teksNama.innerText = namaAnggota;  
             modalZoom.classList.add('aktif');
         }
-
         function tutupZoomFoto(event) {
             if(event.target.id === 'modalZoomFoto' || event.target.classList.contains('tutup-zoom')) {
                 document.getElementById('modalZoomFoto').classList.remove('aktif');
