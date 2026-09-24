@@ -10,6 +10,10 @@
     <!-- IMPORT FONT AWESOME UNTUK LOGO SOSMED -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <!-- IMPORT LEAFLET JS UNTUK MAP INTERAKTIF -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
     <style>
         /* ====================================================== */
         /* IMPORT FONT                                            */
@@ -272,6 +276,39 @@
         @keyframes turunDariAtas { 0% { opacity: 0; transform: translateY(-30px); } 100% { opacity: 1; transform: translateY(0); } }
         .efek-gulir { opacity: 0; transform: translateY(40px); transition: all 0.6s ease-out; visibility: hidden; }
         .efek-gulir.muncul { opacity: 1; transform: translateY(0); visibility: visible; }
+
+        /* ====================================================== */
+        /* KUSTOMISASI MAP LEAFLET (ADMIN MAP & MOBILE FRIENDLY)  */
+        /* ====================================================== */
+        .leaflet-popup-content-wrapper {
+            background: rgba(22, 22, 26, 0.95);
+            border: 1px solid var(--aksen-2);
+            color: var(--teks-putih);
+            box-shadow: 0 0 15px rgba(255, 145, 0, 0.5);
+            border-radius: 8px;
+        }
+        .leaflet-popup-tip { background: var(--aksen-2); }
+        .leaflet-popup-content { margin: 15px; text-align: center; font-family: 'Poppins', sans-serif; min-width: 200px; }
+        .leaflet-popup-content h4 { margin: 0 0 10px 0; color: var(--aksen-2); font-family: 'Oswald', sans-serif; font-size: 1.2em; letter-spacing: 1px; }
+        .leaflet-popup-content img { width: 100%; max-height: 120px; object-fit: cover; border-radius: 5px; border: 1px solid var(--aksen-1); margin-bottom: 10px; }
+        .custom-marker-ikon { font-size: 30px; color: var(--aksen-1); filter: drop-shadow(0 0 10px var(--aksen-1)); text-shadow: 0 0 10px var(--aksen-1); }
+        
+        .tombol-hapus-titik { 
+            background: linear-gradient(135deg, #ff1200, #aa0000); color: white; border: 1px solid #ff1200; padding: 12px 15px; border-radius: 8px; cursor: pointer; font-size: 1em; margin-top: 15px; font-weight: bold; width: 100%; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(255, 18, 0, 0.4); transition: all 0.3s;
+        }
+        .tombol-hapus-titik:active { transform: scale(0.95); box-shadow: 0 2px 5px rgba(255, 18, 0, 0.5); }
+        #mapDinamis.mode-admin { cursor: crosshair !important; }
+
+        /* Fitur Mata Password */
+        .password-container { position: relative; width: 80%; margin: 0 auto 15px auto; }
+        .password-container input { width: 100%; padding: 10px; padding-right: 40px; border-radius: 5px; border: 1px solid var(--aksen-2); background: var(--latar-belakang); color: white; box-sizing: border-box; }
+        .toggle-password { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 18px; color: var(--teks-abu); }
+        
+        /* Fitur Upload Gambar */
+        .upload-container { text-align: left; width: 90%; margin: 0 auto 20px auto; }
+        .upload-container label { font-size: 0.9em; color: var(--teks-abu); }
+        .upload-container input[type="file"] { width: 100%; padding: 8px; margin-top: 5px; border: 1px dashed var(--aksen-2); border-radius: 5px; color: white; background: rgba(0,0,0,0.5); }
+        #previewGambar { max-width: 100%; max-height: 150px; border-radius: 8px; border: 2px solid var(--aksen-1); display: none; margin-top: 10px; object-fit: cover; }
     </style>
 </head>
 <body>
@@ -369,7 +406,16 @@
                 </div>
                 
                 <div style="flex: 1; min-width: 300px; background: #000; padding: 30px; display: flex; align-items: center; justify-content: center; border-left: 1px solid rgba(255,255,255,0.1);">
-                    <iframe style="border-radius:12px; box-shadow: 0 0 25px rgba(255, 145, 0, 0.2);" src="https://open.spotify.com/embed/playlist/37i9dQZF1DXc8kgYqQLKWv?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    <!-- 
+                    ========================================================
+                    CARA MENGGANTI PLAYLIST SPOTIFY:
+                    1. Buka playlist Spotify Anda.
+                    2. Klik titik tiga (...) -> Bagikan (Share) -> Sematkan Daftar Putar (Embed Playlist).
+                    3. Copy kodenya, dan ambil hanya bagian link di dalam src="..." 
+                       Lalu ganti link di bawah ini dengan link milik Anda.
+                    ========================================================
+                    -->
+                    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1PHuPT2LjpNF17zhe0LtGi?utm_source=generator&theme=0&si=32308049404d4e9f" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                 </div>
                 
             </div>
@@ -466,7 +512,7 @@
             </div>
         </section>
 
-        <!-- JADWAL DENGAN GOOGLE MAPS EMBED & UI TAKTIS -->
+        <!-- JADWAL DENGAN MAP DINAMIS KHUSUS ADMIN -->
         <section id="jadwal-kegiatan" class="efek-gulir" style="position: relative; overflow: hidden;">
             <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(255,18,0,0.1) 0%, transparent 70%); border-radius: 50%; pointer-events: none;"></div>
             
@@ -512,10 +558,18 @@
                 </div>
                 
                 <div style="flex: 1; min-width: 300px; position: relative; border-radius: 12px; overflow: hidden; border: 2px solid rgba(255, 145, 0, 0.4); box-shadow: 0 0 25px rgba(255, 18, 0, 0.2);">
-                    <div style="position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.8); color: var(--aksen-2); padding: 6px 12px; border-radius: 5px; font-size: 0.8em; z-index: 10; font-weight: bold; font-family: 'Oswald', sans-serif; letter-spacing: 1px; border: 1px solid var(--aksen-2);">
+                    <!-- Tombol Khusus Admin -->
+                    <button onclick="bukaLoginAdmin()" style="position: absolute; top: 15px; right: 15px; z-index: 1000; background: rgba(0,0,0,0.8); border: 1px solid var(--aksen-1); color: var(--aksen-1); padding: 5px 15px; border-radius: 5px; cursor: pointer; font-family: 'Oswald', sans-serif; font-weight: bold; letter-spacing: 1px; box-shadow: 0 0 10px rgba(255,18,0,0.5);">
+                        <i class="fas fa-lock"></i> ADMIN MAP
+                    </button>
+                    
+                    <!-- Radar Status -->
+                    <div style="position: absolute; top: 15px; left: 15px; background: rgba(0,0,0,0.8); color: var(--aksen-2); padding: 6px 12px; border-radius: 5px; font-size: 0.8em; z-index: 1000; font-weight: bold; font-family: 'Oswald', sans-serif; letter-spacing: 1px; border: 1px solid var(--aksen-2);">
                         <i class="fas fa-satellite-dish" style="animation: tombolDenyut 2s infinite;"></i> RADAR LOKASI
                     </div>
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126438.33806434444!2d110.29606822812683!3d-7.803164016666872!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5787bd5b6bc5%3A0x21723fd4d3684f71!2sYogyakarta%2C%20Kota%20Yogyakarta%2C%20Daerah%20Istimewa%20Yogyakarta!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" width="100%" height="100%" style="border:0; min-height: 350px; filter: contrast(1.1) opacity(0.85) saturate(1.2);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    
+                    <!-- Kontainer Map Baru -->
+                    <div id="mapDinamis" style="width: 100%; height: 100%; min-height: 400px; z-index: 1;"></div>
                 </div>
                 
             </div>
@@ -790,9 +844,221 @@
         </div>
     </div>
 
+    <!-- MODAL LOGIN ADMIN MAP -->
+    <div id="modalAdminMap" class="modal-overlay" onclick="tutupAdminMap(event)">
+        <div class="modal-konten" style="max-width: 400px; text-align: center; border-color: var(--aksen-1);">
+            <span class="tutup-modal" onclick="tutupAdminMapManual()">&times;</span>
+            <h3 style="color: var(--aksen-1); font-family: 'Oswald', sans-serif; margin-bottom: 20px;"><i class="fas fa-user-shield"></i> Akses Admin</h3>
+            
+            <div class="password-container">
+                <input type="password" id="inputPasswordAdmin" placeholder="Masukkan Password">
+                <span class="toggle-password" id="ikonMataAdmin" onclick="togglePassword()">👁️</span>
+            </div>
+
+            <button onclick="loginAdminMap()" class="tombol" style="padding: 8px 20px; font-size: 0.9em;">Login</button>
+        </div>
+    </div>
+
+    <!-- MODAL TAMBAH TITIK KUMPUL -->
+    <div id="modalTambahTitik" class="modal-overlay">
+        <div class="modal-konten" style="max-width: 400px; text-align: center; border-color: var(--aksen-2);">
+            <h3 style="color: var(--aksen-2); font-family: 'Oswald', sans-serif; margin-bottom: 20px;">Tandai Titik Kumpul</h3>
+            
+            <input type="text" id="namaLokasi" placeholder="Nama Lokasi (ex: Tugu Jogja)" style="width: 90%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid var(--aksen-2); background: var(--latar-belakang); color: white;">
+            
+            <div class="upload-container">
+                <label for="fotoProfil">Upload Foto dari HP/Galeri:</label>
+                <input type="file" id="fotoProfil" name="fotoProfil" accept="image/*">
+                <img id="previewGambar" src="" alt="Preview">
+            </div>
+            
+            <div style="display: flex; justify-content: center; gap: 10px; margin-top: 15px;">
+                <button onclick="simpanTitik()" class="tombol" style="padding: 8px 20px; background: var(--aksen-2); color: black;">Simpan</button>
+                <button onclick="batalTambahTitik()" class="tombol" style="padding: 8px 20px; background: #333; color: white;">Batal</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // ====================================================== //
-        // LOGIKA MODAL INFO PERAN TAKTIS                         //
+        // LOGIKA MAP DINAMIS, UPLOAD & FITUR ADMIN               //
+        // ====================================================== //
+        let mapUtama = null;
+        let statusAdmin = false;
+        let koordinatSementara = null;
+        let daftarMarker = [];
+        let base64GambarSementara = ""; 
+
+        // Inisialisasi Map saat halaman dimuat
+        window.addEventListener('load', function() {
+            mapUtama = L.map('mapDinamis').setView([-7.7956, 110.3695], 13);
+            
+            L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+                attribution: '&copy; Google Maps',
+                maxZoom: 20
+            }).addTo(mapUtama);
+
+            muatTitikKumpul();
+
+            mapUtama.on('click', function(e) {
+                if(statusAdmin) {
+                    koordinatSementara = e.latlng;
+                    document.getElementById('modalTambahTitik').classList.add('aktif');
+                } else {
+                    alert("Hanya Admin yang dapat menandai lokasi baru!");
+                }
+            });
+        });
+
+        // Fitur Mata Password
+        function togglePassword() {
+            const passwordInput = document.getElementById("inputPasswordAdmin");
+            const eyeIcon = document.getElementById("ikonMataAdmin");
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                eyeIcon.textContent = "🙈"; 
+            } else {
+                passwordInput.type = "password";
+                eyeIcon.textContent = "👁️"; 
+            }
+        }
+
+        // Fitur Login Admin
+        function bukaLoginAdmin() {
+            if(statusAdmin) {
+                alert("Anda sudah login sebagai Admin. Silakan klik area map untuk menandai lokasi.");
+            } else {
+                document.getElementById('modalAdminMap').classList.add('aktif');
+            }
+        }
+        function tutupAdminMapManual() { 
+            document.getElementById('modalAdminMap').classList.remove('aktif'); 
+            // Reset input password saat ditutup
+            document.getElementById('inputPasswordAdmin').value = "";
+            document.getElementById('inputPasswordAdmin').type = "password";
+            document.getElementById('ikonMataAdmin').textContent = "👁️";
+        }
+        function tutupAdminMap(event) { if (event.target.id === 'modalAdminMap') tutupAdminMapManual(); }
+
+        function loginAdminMap() {
+            const pass = document.getElementById('inputPasswordAdmin').value;
+            if(pass === "turaturu2026") {
+                statusAdmin = true;
+                tutupAdminMapManual();
+                alert("Login Berhasil! Klik di area map mana saja untuk menetapkan titik kumpul.");
+                
+                document.getElementById('mapDinamis').classList.add('mode-admin');
+
+                // Muat ulang map agar tombol hapus muncul
+                daftarMarker.forEach(m => mapUtama.removeLayer(m.marker));
+                daftarMarker = [];
+                muatTitikKumpul();
+            } else {
+                alert("Password Salah!");
+            }
+        }
+
+        // Fitur Upload Gambar (File API)
+        document.getElementById('fotoProfil').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const preview = document.getElementById('previewGambar');
+            if(file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    base64GambarSementara = event.target.result;
+                    preview.src = base64GambarSementara;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                base64GambarSementara = "";
+                preview.style.display = 'none';
+            }
+        });
+
+        // Fitur Tambah & Simpan Titik Kumpul
+        function batalTambahTitik() {
+            document.getElementById('modalTambahTitik').classList.remove('aktif');
+            document.getElementById('namaLokasi').value = "";
+            document.getElementById('fotoProfil').value = "";
+            base64GambarSementara = "";
+            document.getElementById('previewGambar').style.display = 'none';
+            document.getElementById('previewGambar').src = "";
+            koordinatSementara = null;
+        }
+
+        function simpanTitik() {
+            const nama = document.getElementById('namaLokasi').value;
+            
+            if(!nama) { alert("Nama lokasi wajib diisi!"); return; }
+
+            const dataLokasi = {
+                id: Date.now(),
+                lat: koordinatSementara.lat,
+                lng: koordinatSementara.lng,
+                nama: nama,
+                gambar: base64GambarSementara || 'https://via.placeholder.com/300x150/16161a/ff9100?text=No+Image'
+            };
+
+            let titikTersimpan = JSON.parse(localStorage.getItem('titikKumpulTuraTuru')) || [];
+            titikTersimpan.push(dataLokasi);
+            localStorage.setItem('titikKumpulTuraTuru', JSON.stringify(titikTersimpan));
+            
+            tambahkanMarkerKeMap(dataLokasi);
+            batalTambahTitik();
+        }
+
+        function muatTitikKumpul() {
+            let titikTersimpan = JSON.parse(localStorage.getItem('titikKumpulTuraTuru')) || [];
+            titikTersimpan.forEach(data => tambahkanMarkerKeMap(data));
+        }
+
+        function tambahkanMarkerKeMap(data) {
+            const iconNeon = L.divIcon({
+                className: 'custom-ikon-pembungkus',
+                html: '<i class="fas fa-map-marker-alt custom-marker-ikon"></i>',
+                iconSize: [30, 30],
+                iconAnchor: [15, 30],
+                popupAnchor: [0, -30]
+            });
+
+            const marker = L.marker([data.lat, data.lng], {icon: iconNeon}).addTo(mapUtama);
+            
+            let kontenPopup = `
+                <h4><i class="fas fa-flag-checkered"></i> ${data.nama}</h4>
+                <img src="${data.gambar}" alt="${data.nama}" onerror="this.src='https://via.placeholder.com/300x150/16161a/ff9100?text=No+Image'">
+                <p style="margin: 0 0 15px 0; font-size: 0.9em; color: #ccc;">Agenda Kumpul Sini!</p>
+                
+                <a href="https://www.google.com/maps?q=${data.lat},${data.lng}" target="_blank" class="tombol" style="font-size: 0.8em; padding: 6px 15px; margin: 0; display: inline-flex; width: 100%; justify-content: center; box-sizing: border-box;">
+                    <i class="fas fa-location-arrow"></i> Buka di Maps
+                </a>
+            `;
+
+            if(statusAdmin) {
+                kontenPopup += `<button class="tombol-hapus-titik" onclick="hapusTitik(${data.id})"><i class="fas fa-trash-alt"></i> Hapus Titik (Admin)</button>`;
+            }
+
+            marker.bindPopup(kontenPopup);
+            daftarMarker.push({ id: data.id, marker: marker });
+        }
+
+        function hapusTitik(id) {
+            if(!statusAdmin) return;
+            if(confirm("Apakah Anda yakin ingin menghapus titik kumpul ini?")) {
+                let titikTersimpan = JSON.parse(localStorage.getItem('titikKumpulTuraTuru')) || [];
+                titikTersimpan = titikTersimpan.filter(titik => titik.id !== id);
+                localStorage.setItem('titikKumpulTuraTuru', JSON.stringify(titikTersimpan));
+                
+                const markerObj = daftarMarker.find(m => m.id === id);
+                if(markerObj) {
+                    mapUtama.removeLayer(markerObj.marker);
+                    daftarMarker = daftarMarker.filter(m => m.id !== id);
+                }
+            }
+        }
+
+        // ====================================================== //
+        // LOGIKA EFEK & MODAL LAINNYA                            //
         // ====================================================== //
         function bukaInfoPeran(namaPeran, deskripsi) {
             document.getElementById('judulPeran').innerText = namaPeran;
@@ -805,17 +1071,12 @@
             document.body.style.overflow = 'auto';
         }
         function tutupInfoPeran(event) {
-            if (event.target.id === 'modalInfoPeran') { tutupInfoPeranManual(); }
+            if (event.target.id === 'modalInfoPeran') tutupInfoPeranManual();
         }
 
-        // ====================================================== //
-        // LOGIKA LIGHTBOX GALERI                                 //
-        // ====================================================== //
         function bukaLightbox(elemen) {
-            const imgSrc = elemen.querySelector('img').src;
-            const teks = elemen.querySelector('.teks-galeri').innerText;
-            document.getElementById('gambarLightbox').src = imgSrc;
-            document.getElementById('teksLightbox').innerText = teks;
+            document.getElementById('gambarLightbox').src = elemen.querySelector('img').src;
+            document.getElementById('teksLightbox').innerText = elemen.querySelector('.teks-galeri').innerText;
             document.getElementById('modalLightbox').classList.add('aktif');
             document.body.style.overflow = 'hidden';
         }
@@ -824,23 +1085,18 @@
             document.body.style.overflow = 'auto';
         }
         function tutupLightbox(event) {
-            if (event.target.id === 'modalLightbox') { tutupLightboxManual(); }
+            if (event.target.id === 'modalLightbox') tutupLightboxManual();
         }
 
-        // ====================================================== //
-        // HILANGKAN PRELOADER SAAT HALAMAN SELESAI DIMUAT        //
-        // ====================================================== //
         window.addEventListener('load', function() {
-            const preloader = document.getElementById('preloader');
-            preloader.style.opacity = '0';
-            setTimeout(() => { preloader.style.display = 'none'; }, 600);
+            setTimeout(() => { 
+                const preloader = document.getElementById('preloader');
+                preloader.style.opacity = '0';
+                setTimeout(() => preloader.style.display = 'none', 600);
+            }, 500);
         });
 
-        // ====================================================== //
-        // LOGIKA EFEK TILT 3D PADA KARTU ANGGOTA                 //
-        // ====================================================== //
-        const kartus = document.querySelectorAll('.kartu');
-        kartus.forEach(kartu => {
+        document.querySelectorAll('.kartu').forEach(kartu => {
             kartu.addEventListener('mousemove', (e) => {
                 if (window.innerWidth > 768) {
                     const rect = kartu.getBoundingClientRect();
@@ -862,39 +1118,23 @@
             });
         });
 
-        // ====================================================== //
-        // LOGIKA PROGRESS BAR SCROLL DAN TOMBOL BACK TO TOP      //
-        // ====================================================== //
         window.addEventListener('scroll', () => {
             const btnAtas = document.getElementById('btn-atas');
-            const scrollProgress = document.getElementById('scroll-progress');
             const scrollTotal = document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrollPersen = (scrollTotal / height) * 100;
-            scrollProgress.style.width = scrollPersen + "%";
-
-            if (window.scrollY > 500) { btnAtas.classList.add('tampil'); } 
-            else { btnAtas.classList.remove('tampil'); }
+            document.getElementById('scroll-progress').style.width = ((scrollTotal / height) * 100) + "%";
+            if (window.scrollY > 500) btnAtas.classList.add('tampil'); 
+            else btnAtas.classList.remove('tampil');
         });
 
-        // ====================================================== //
-        // LOGIKA COUNTDOWN TIMER ANNIVERSARY                     //
-        // ====================================================== //
         const tanggalTujuan = new Date("Aug 2, 2026 00:00:00").getTime();
         const hitungMundur = setInterval(function() {
-            const sekarang = new Date().getTime();
-            const selisih = tanggalTujuan - sekarang;
-
+            const selisih = tanggalTujuan - new Date().getTime();
             if (selisih > 0) {
-                const hari = Math.floor(selisih / (1000 * 60 * 60 * 24));
-                const jam = Math.floor((selisih % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const menit = Math.floor((selisih % (1000 * 60 * 60)) / (1000 * 60));
-                const detik = Math.floor((selisih % (1000 * 60)) / 1000);
-
-                document.getElementById("hari").innerText = hari.toString().padStart(2, '0');
-                document.getElementById("jam").innerText = jam.toString().padStart(2, '0');
-                document.getElementById("menit").innerText = menit.toString().padStart(2, '0');
-                document.getElementById("detik").innerText = detik.toString().padStart(2, '0');
+                document.getElementById("hari").innerText = Math.floor(selisih / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                document.getElementById("jam").innerText = Math.floor((selisih % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                document.getElementById("menit").innerText = Math.floor((selisih % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                document.getElementById("detik").innerText = Math.floor((selisih % (1000 * 60)) / 1000).toString().padStart(2, '0');
             } else {
                 clearInterval(hitungMundur);
                 document.getElementById("countdown-container").style.display = "none";
@@ -902,21 +1142,11 @@
             }
         }, 1000);
 
-        // ====================================================== //
-        // LOGIKA ANIMASI SCROLL (MUNCUL PERLAHAN)                //
-        // ====================================================== //
         const pengamat = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('muncul');
-                }
-            });
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('muncul'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.efek-gulir').forEach((el) => pengamat.observe(el));
 
-        // ====================================================== //
-        // LOGIKA MODAL ANGGOTA & ZOOM FOTO                       //
-        // ====================================================== //
         function bukaModalAnggota() {
             document.getElementById('modalDaftar').classList.add('aktif');
             document.body.style.overflow = 'hidden'; 
@@ -926,15 +1156,13 @@
             document.body.style.overflow = 'auto'; 
         }
         document.getElementById('modalDaftar').addEventListener('click', function(e) {
-            if(e.target === this) { tutupModalAnggota(); }
+            if(e.target === this) tutupModalAnggota();
         });
+
         function bukaZoomFoto(elemenGambar, namaAnggota) {
-            const modalZoom = document.getElementById('modalZoomFoto');
-            const gambarZoom = document.getElementById('gambarZoom');
-            const teksNama = document.getElementById('namaZoom');
-            gambarZoom.src = elemenGambar.src; 
-            teksNama.innerText = namaAnggota;  
-            modalZoom.classList.add('aktif');
+            document.getElementById('gambarZoom').src = elemenGambar.src; 
+            document.getElementById('namaZoom').innerText = namaAnggota;  
+            document.getElementById('modalZoomFoto').classList.add('aktif');
         }
         function tutupZoomFoto(event) {
             if(event.target.id === 'modalZoomFoto' || event.target.classList.contains('tutup-zoom')) {
